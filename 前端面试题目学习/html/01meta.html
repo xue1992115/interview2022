@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- head头部信息用来描述文档的各种属性和信息 -->
+<head>
+    <!-- 一、meta标签 -->
+        <!-- meta标签定义元数据的类型 -->
+        <!-- 1、http-equiv -->
+        <!-- http-equiv也是和content一起使用，前者表示要表示的元数据的名称，后者是元数据的值。 -->
+        <!-- http-equiv一般是和请求头相关，设置的值也是和请求相关的值 -->
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <!-- 声明文档的类型和字符集 -->
+        <meta http-equiv="Content-type" content="text/html,charset=utf-8">
+        <!-- 设置浏览器的过期时间 -->
+        <meta http-equiv="expires" content="31 Dec 2021">
+        <!-- 设置页面刷新时间，以及指定页面跳转 -->
+        <meta http-equiv="refresh" content="5 url=http://www.baidu.com">
+        <!-- 强制页面在当前窗口独立展示，防止别人的页面在iframe中展示自己的页面 -->
+        <meta http-equiv="window-target" content="_top">
+        <!-- 禁止浏览器从本地的计算机的缓存中访问内容 -->
+        <meta http-equiv="pragma" content="no-cache">
+        <!-- 优先使用最新的IE版本 -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- 优先使用最新的chrome版本 -->
+        <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+
+        <!-- 2、name属性 -->
+        <!-- name和content一起使用，name表示元数据名称，后者表示元数据内容 -->
+        <!-- 为viewport的初始化大小提供指示，viewport主要是影响移动端的页面布局-->
+        <!-- viewport的重点学习
+            width viewport 宽度(数值/device-width)
+            height viewprot 高度(数值/device-height)
+            initial-scale 初始缩放比例
+            maximum-scale 最大缩放比例
+            minimum-scale 最小缩放比例
+            user-scalable 是否允许用户进行手动的缩放
+         -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- 作者信息 -->
+        <meta name="author" content="hxx">
+        <!-- 页面信息描述 -->
+        <meta name="description" content="测试一个页面">
+        <!-- 关键字 -->
+        <meta name="keywords" content="测试">
+        <!-- 告诉搜索引擎可以抓取哪些页面 all none index fellow noindex nofellow -->
+        <meta name="robots" content="all">
+    <!-- 二、base标签 -->
+        <!-- 1、href是必选属性，指定了文档的基础url地址。定义了当文档中的链接点击后的打开方式_blank，_self，_parrent，_top。 -->
+        <base href="http://www.w3school.com.cn/i/" target="_blank" />
+        <!-- 2、link标签详细学习
+            （1）href用来指定外部资源的链接地址
+            （2）hreglang用来指定外部资源使用的语言
+            （3）media用来指定外部资源使用的哪种媒体
+            （4）rel表明外部资源和本文档的关系
+                rel的核心的值如下：
+                alternate: 链接到文档的替代版本
+                archives：链接到文档集或历史数据
+                author：提供指向文档作者的链接
+                bookmark：定义文档在收藏夹中显示的书签图标
+                dns-prefetch：指定浏览器预先执行目标资源的DNS解析；是一种dns预解析技术，用户在浏览网页时，浏览器会对网页中的域名进行解析缓存，而在用户单击页面的链接时，就不再进行DNS的解析，以此减少用户等待时间，提升用户体验。
+                //<meta http-equiv="x-dns-prefetch-control" content="off"> 可以禁止隐式的dns解析
+                external：链接到外部，即告知搜索引擎，此链接不是本站链接
+                help：链接帮助信息
+                noreferrer：可以阻止浏览器发送访问来源信息
+                preload：对资源进行预加载
+                prefetch：对资源进行预加载并缓存，通常preload用于加载当前页面的资源，而prefetch用于加载将来页面可能需要的资源
+                preconnect：预先连接到目标资源的地址，告知浏览器提前打开与链接网站的连接，其中包括DNS预解析、TLS协商、TCP握手，消除了往返延迟并为用户节省了时间，以便后续可以更快地获取链接内容。
+                tylesheet：指定作为样式表的外部资源
+                参考链接：https://juejin.cn/post/6971640926389141518#heading-21
+            （5）sizes：指定图标的大小，只对属性rel="icon"生效
+            （6）type：说明外部资源的 MIME 类型，如text/css、image/x-icon
+        -->
+    <!-- 三、link标签 -->
+    <!-- link用于引入外部样式表，在html的头部可以包含任意数量的link，link标签有以下常用属性。 -->
+        <!-- type： 定义文档的类型 -->
+        <!-- type： 定义文档的类型 -->
+        <link type="text/css" rel="stylesheet" href="github-markdown.css">
+    <!-- 四、style标签 -->
+        <style>
+            body {
+                background: #f3f5f9;
+            }
+        </style>
+    <!-- 五、script标签 -->
+        <!-- 1、type表示的资源的类型 -->
+        <script type="text/javascript"></script>
+        <!-- 2、async表示的是异步执行脚本，设置这个属性的script不会影响后续的html的解析
+        注意：async设置的资源的加载和文档的解析是同时进行的，但是外部资源加载完成之后，立即进行执行，执行过程中html文档的解析会停止-->
+        <script async src="script.js"></script>
+        <!-- 3、charset规定外部脚本文件中使用的编码-->
+        <script type="text/javascript" src="script.js" charset="UTF-8"></script>
+        <!-- 4、规定是否对脚本执行进行延迟，直到页面加载为止。设置了defer属性的script不会阻止后面html的解析，加载与解析是共同进行的，
+        ，但是script的执行要在所有元素解析完成之后，DOMContentLoaded事件触发之前完成。 -->
+        <script defer src="script.js"></script>
+        <!-- 5、外部脚本的地址 -->
+        <script src="script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<!-- 移动端常用的标签 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection"content="telephone=no, email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" /><!-- 删除苹果默认的工具栏和菜单栏 -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /><!-- 设置苹果工具栏颜色 -->
+<meta name="format-detection" content="telphone=no, email=no" /><!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+<!-- 启用360浏览器的极速模式(webkit) -->
+<meta name="renderer" content="webkit">
+<!-- 避免IE使用兼容模式 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+<meta name="HandheldFriendly" content="true">
+<!-- 微软的老式浏览器 -->
+<meta name="MobileOptimized" content="320">
+<!-- uc强制竖屏 -->
+<meta name="screen-orientation" content="portrait">
+<!-- QQ强制竖屏 -->
+<meta name="x5-orientation" content="portrait">
+<!-- UC强制全屏 -->
+<meta name="full-screen" content="yes">
+<!-- QQ强制全屏 -->
+<meta name="x5-fullscreen" content="true">
+<!-- UC应用模式 -->
+<meta name="browsermode" content="application">
+<!-- QQ应用模式 -->
+<meta name="x5-page-mode" content="app">
+<!-- windows phone 点击无高光 -->
+<meta name="msapplication-tap-highlight" content="no">
+<!-- 适应移动端end -->
