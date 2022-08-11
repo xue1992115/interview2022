@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+  </body>
+  <script>
+    // 方案一： 代码比较垃圾
+    // const canvas = document.getElementById("canvas");
+    // const context = canvas.getContext("2d");
+    // var x = 100;
+    // setInterval(() => {
+    //   x++;
+    //   context.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    //   context.beginPath();
+    //   context.fillStyle = "blue";
+    //   context.arc(x, 50, 40, 0, 2 * Math.PI, true);
+    //   context.fill();
+    //   context.closePath();
+    // }, 20);
+
+    // 方案二： 采用面向对象的方式
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    function Ball(x, y, r, color, speed) {
+      this.x = x;
+      this.y = y;
+      this.r = r;
+      this.color = color;
+      this.speed = speed;
+
+      this.dx = Math.random() * 10 - 2;
+      this.dy = Math.random() * 10 - 2;
+      this.dr = Math.random() + 0.6;
+      // 将小球放到数组中
+      arr.push(this);
+    }
+    Ball.prototype = {
+      update: function () {
+        this.x += this.dx;
+        this.y += this.dy;
+        this.r -= this.dr;
+        if (this.r <= 0) {
+          arr.map((item, index) => {
+            if (this === item) {
+              arr.splice(index, 1);
+            }
+          });
+        }
+      },
+      render: function () {
+        ctx.beginPath();
+        if (this.r > 0) {
+          ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, true);
+        }
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.closePath();
+      },
+    };
+    const arr = [];
+    // new Ball(100, 100, 50, "red", 1);
+    // new Ball(100, 100, 50, "red", 1);
+    // new Ball(100, 100, 50, "red", 1);
+    // new Ball(100, 100, 50, "red", 1);
+    // new Ball(100, 100, 50, "red", 1);
+    // new Ball(100, 100, 50, "red", 1);
+    // new Ball(100, 100, 50, "red", 1);
+    // 监听鼠标移动的时候创建
+    canvas.addEventListener("mousemove", (event) => {
+      new Ball(event.offsetX, event.offsetY, 30, "blue");
+    });
+    setInterval(() => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      arr.map((item) => {
+        item && item.update();
+        item && item.render();
+      });
+    }, 100);
+  </script>
+</html>
+<!-- canvas面向对象绘画，基本原理绘制到canvas上的图像都删格化了
+因此，动画需要清楚 -->

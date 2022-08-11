@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 参考文章：https://juejin.cn/post/7124312346947764260#heading-51 -->
+    <!-- 1、基本的属性 widht height
+    默认的宽高分别是：300 * 150 元素超过的部分会被隐藏 -->
+    <!-- <svg width="200" height="300"> -->
+    <!-- 100 * 100的显示区域会放到300 * 300(svg宽高)的SVG中去显示，整体就放大了3倍 -->
+    <svg width="300" height="300" viewBox="0 0 100 100">
+      <circle cx="100" cy="100" r="100" />
+    </svg>
+    <!-- 2、基本的图形 -->
+    <!-- 2.1 圆形 -->
+    <svg width="300" height="300">
+      <circle cx="100" cy="100" r="100" />
+    </svg>
+    <svg width="300" height="300">
+      <!-- x、y为矩形的起始点坐标，rx、ry为圆角x、y轴方向的半径， width、height为矩形的宽高 -->
+      <rect x="0" y="0" rx="50" ry="50" width="300" height="200" />
+    </svg>
+    <!-- 2.2 椭圆 -->
+    <svg width="300" height="300">
+      <!-- cx、cy为椭圆的坐标，rx为椭圆的x轴半径、ry为椭圆的y轴半径 -->
+      <ellipse cx="100" cy="100" rx="100" ry="50" />
+    </svg>
+    <!-- 2.3 线条 -->
+    <svg width="300" height="300">
+      <!-- 不设置样式属性 style 是看不出效果的 -->
+      <line x1="50" x2="50" y1="200" y2="50" style="stroke: #000000" />
+    </svg>
+    <!-- 2.4 折线 -->
+    <svg width="300" height="300">
+      <!-- 不设置样式属性style是看不出效果的 并且polyline默认为填充需要把fill属性设置为none -->
+      <!-- points表示的是坐标点 -->
+      <polyline
+        points="0 0, 20 40, 70 80, 100 90, 200 30, 250 50"
+        fill="none"
+        style="stroke: #000000"
+      />
+    </svg>
+    <!-- 2.5 多边形 -->
+    <svg width="300" height="300">
+      <polygon
+        points="0 0, 20 40, 70 80, 100 90, 200 30, 250 50"
+        fill="none"
+        style="stroke: #000000"
+      />
+    </svg>
+    <!-- 2.6 路径 SVG中最重要的就是路径，并且也是最重要的 -->
+    <!-- 可以绘制圆形、椭圆、矩形、线条、折线、多边形、贝塞尔曲线等。 -->
+    <svg width="300" height="300">
+      <path
+        d="M50 50 H 200 V 200 H 50 L 50 50"
+        fill="none"
+        style="stroke: #000000"
+      />
+    </svg>
+    <!-- path中的命令
+      M = Move to 把笔触移动到某一点
+      L = Line to 从线的结束点
+      H = Horizontal Line to 
+      V = Vertical Line to
+      Q = Quadratic Bezier Curve to
+      T = Smooth Quadratic Bezier Curve to
+      C = Curve to
+      S = Smooth Curve to
+      A = Elliptical Arc
+      Z = close path
+      -->
+    <svg width="300" height="300">
+      <!-- 从起始点（50， 20）画一条到（250， 20）的直线 -->
+      <path d="M50 20 L250 20" style="stroke: #000000" />
+      <!-- 从起始点（50， 50）画一条到（250， 50）的直线 和 从起始点（50， 100）画一条到（250， 100）的直线 -->
+      <!-- M命令为多个时，后面的M命令为先线段的起始点 -->
+      <path d="M50 50 L250 50 M50 100 L250 100" style="stroke: #ff0000" />
+      <!-- 从起始点（50， 150）画一条到（250， 150）的直线 -->
+      <!-- M命令后面连续跟着多个坐标点，除了第一个坐标点，后面的全部默认为隐式的L命令 -->
+      <path d="M50 150 250 150" style="stroke: #00ff00" />
+      <!-- 从起始点（50， 200）画一条到（250， 200）又到（250，250）的折线 -->
+      <!-- 多个L命令连续可以省略后面的L命令 -->
+      <path d="M50 200 L250 200 250 250 " fill="none" style="stroke: #0000ff" />
+      <!-- 从起始点（50， 20）画一条X轴为250的水平直线 -->
+      <path d="M50 20 H400" style="stroke: red" />
+      <!-- 从起始点（50， 20）画一条Y轴为250的垂直直线 -->
+      <path d="M50 20 V250" style="stroke: #000000" />
+      <path d="M50 20 H200 V200 Z" fill="none" style="stroke: #000000" />
+      <!-- 平滑的曲线,需要一个结束点和一个控制点 -->
+      <path d="M50 100 Q 175 200 300 100" fill="none" style="stroke: #ff0000" />
+    </svg>
+    <!-- 延长二次贝塞尔曲线的简化命令，T命令可以通过前一个控制点推断出后一个控制点，这也就是为什么T命令只需要一个坐标的原因。 -->
+    <svg width="600px" height="300px">
+      <path
+        d="M50 100 Q 175 200 300 100 T 600 100 "
+        fill="none"
+        style="stroke: #ff0000"
+      />
+    </svg>
+    <!-- 三次贝塞尔曲线 -->
+    <svg width="300" height="300">
+      <path
+        d="M50 50 C 100 100, 200 100, 250 50"
+        fill="none"
+        style="stroke: #000000"
+      />
+      <path
+        d="M50 200 C 100 250, 200 150, 250 200"
+        fill="none"
+        style="stroke: #ff0000"
+      />
+    </svg>
+    <svg width="300px" height="300px">
+      <path
+        d="M10 100 C 40 10, 65 10, 95 100"
+        fill="none"
+        style="stroke: #ff0000"
+      />
+    </svg>
+    <svg width="300px" height="1500px">
+      <path
+        d="M10 100 50 100  A 30 50 0 0 1 150 100 L 200 100"
+        fill="none"
+        style="stroke: #ff0000"
+      />
+      <!-- 旋转45度的弧（第三个参数） -->
+      <path
+        d="M10 200 50 200  A 30 50 45 0 1 150 200 L 200 200"
+        fill="none"
+        style="stroke: #ff0000"
+      />
+      <!-- 1表示大角度弧（第四个参数） -->
+      <path
+        d="M10 300 50 300  A 30 50 -45 1 1 150 300 L 200 300"
+        fill="none"
+        style="stroke: #ff0000"
+      />
+      <!-- 0逆时针（第五个参数） -->
+      <path
+        d="M10 400 50 400  A 30 50 0 1 0 150 400 L 200 400"
+        fill="none"
+        style="stroke: #ff0000"
+      />
+    </svg>
+    <!-- 3、属性 -->
+    <svg>
+      <circle cx="80" cy="50" r="50" />
+      <circle cx="200" cy="50" r="50" fill="#ff0000" />
+      <circle cx="200" cy="130" r="50" fill="#00ff00" fill-opacity="0.5" />
+      <circle cx="200" cy="200" r="50" stroke="#ff6666" stroke-width="10" />
+    </svg>
+  </body>
+</html>

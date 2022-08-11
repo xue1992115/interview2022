@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas width="200" height="200" id="canvas"
+      >对不起，你的浏览器不支持canvas</canvas
+    >
+  </body>
+  <script>
+    const canvas = document.getElementById("canvas");
+    const context = canvas.getContext("2d");
+    context.fillRect(0, 0, 200, 200);
+  </script>
+</html>
+<!-- canvas比较重要的API -->
+<!-- 1、注意 width和height不能css设置，否则会出现拉伸；变形
+如果非要在js中设置的话，可以设置canvas.width = 300 -->
+
+<!-- 
+  API:
+// 获取上下文对象
+canvas.getContext()
+
+// 填充对象
+context.fillRect()
+// 开始画线
+context.beginPath()
+// 结束画线
+context.closePath()
+// 线的起始点
+context.moveTo()
+// 线的结束点
+context.lineTo()
+// 画线
+context.stroke()
+// 填充
+context.fill()
+// 矩形路径
+context.rect()
+// 矩形路径绘画
+context.strokeRect()
+// 填充矩形
+context.fillRect()
+// 弧形
+context.arc()
+// 椭圆
+context.ellipse()
+// 贝塞尔曲线
+context.quadraticCurveTo()
+context.bezierCurveTo()
+// 渐变
+context.createLinearGradient()
+context.createRadialGradient()
+gradient1.addColorStop()
+// 图片
+context.drawImage()
+// 变形
+context.translate()
+context.scale()
+context.rotate()
+// 裁剪
+context.clip()
+
+// 线的宽度设置
+context.lineWidth
+// 线的颜色设置
+context.strokeStyle
+// 填充的颜色
+context.fillStyle
+// 线两端的样式 round butt square
+context.lineCap = "butt";
+// 透明度
+context.globalAlpha = 0.5
+
+-->
