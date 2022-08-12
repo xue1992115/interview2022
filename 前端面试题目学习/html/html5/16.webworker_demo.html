@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计算用户输入的累加和</title>
+  </head>
+  <body>
+    <input type="number" id="num" />
+    <input type="button" value="计算" id="btn" onclick="run()" />
+    <div id="msg">0</div>
+  </body>
+  <script>
+    const num = document.getElementById("num");
+    const msg = document.getElementById("msg");
+    const w = new Worker("./demo/demo_workers2.js");
+    function run() {
+      const value = num.value;
+      w.postMessage(value);
+    }
+    w.onmessage = function (event) {
+      console.log(event.data);
+      msg.innerHTML = event.data;
+    };
+  </script>
+</html>

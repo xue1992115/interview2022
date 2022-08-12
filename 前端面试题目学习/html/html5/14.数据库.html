@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // 数据库的核心方法
+    // 1、openDatabase 打开数据库
+    // 2、transaction 控制一个事务
+    // 3、executeSql 执行实际的SQL查询
+    var db = openDatabase("mydb", "1.0", "Test DB", 2 * 1024 * 1024);
+    db.transaction(function (tx) {
+      tx.executeSql("CREATE TABLE IF NOT EXISTS LOGS (id unique, log)");
+    });
+  </script>
+</html>

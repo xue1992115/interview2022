@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- 启用离线缓存，需要在html中添加manifest字段
+manifest文件包括下边的内容：
+
+CACHE MANIFEST - 在此标题下列出的文件将在首次下载后进行缓存
+NETWORK - 在此标题下列出的文件需要与服务器的连接，且不会被缓存
+FALLBACK - 在此标题下列出的文件规定当页面无法访问时的回退页面（比如 404 页面）
+ -->
+ <!-- 更新缓存
+  浏览器会对比新的manifest文件与旧的manifest文件，
+  若更新了在重新下载离线资源，并进行缓存
+ -->
+<html lang="en" manifest="demo.appcache">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    // 离线浏览 - 用户可在应用离线时使用它们
+    // 速度 - 已缓存资源加载得更快
+    // 减少服务器负载 - 浏览器将只从服务器下载更新过或更改过的资源。
+  </script>
+</html>
