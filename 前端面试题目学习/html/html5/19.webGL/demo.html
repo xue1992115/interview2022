@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas id="canvas"> </canvas>
+  </body>
+  <script>
+    // 1、什么是WebGL
+    // webGL是一项网页上绘制和渲染三位图形的技术
+    // 2、使用场景
+    // 3D可视化需求的涌现，酷炫的活动宣传页，三维数字城市，VR全景展示、3D 产品展示等领域中，很多项目都是用 WebGL 实现的，也只能用WebGL来做，也就是说，WebGL 的时代就在眼前了
+    // 3、demo
+    const canvas = document.getElementById("canvas");
+    // 获取webgl绘图的上下文
+    const context = canvas.getContext("webgl");
+    // 指定将要用来清空绘图区的颜色
+    context.clearColor(255, 0, 0, 1); // 参数 r g b a
+    context.clear(context.COLOR_BUFFER_BIT);
+  </script>
+</html>
