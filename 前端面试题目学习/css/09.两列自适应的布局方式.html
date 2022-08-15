@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>两列布局，左边固定右边自适应</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      /* 方法一： flex布局
+    父级元素设置flex布局
+    左边元素固定宽度，右边元素宽度设置100% */
+
+      /* .box {
+        display: flex;
+      }
+      .box1 {
+        width: 100px;
+        background: red;
+        height: 200px;
+      }
+      .box2 {
+        width: 100%;
+        background: blue;
+        height: 200px;
+      } */
+      /* 方法二：float布局 */
+      /* .box1 {
+        float: left;
+        width: 100px;
+        background: red;
+        height: 200px;
+      }
+      .box2 {
+        float: left;
+        width: calc(100% - 100px);
+        background: blue;
+        height: 300px;
+      } */
+      /* .box1 {
+        float: left;
+        width: 100px;
+        background: red;
+        height: 200px;
+      }
+      .box2 {
+        width: 100%;
+        background: blue;
+        height: 200px;
+      } */
+      /* 方法三：absolute布局 */
+      /* .box1 {
+        position: absolute;
+        width: 100px;
+        background: red;
+        height: 200px;
+      }
+      .box2 {
+        width: calc(100% - 100px);
+        background: blue;
+        height: 200px;
+        margin-left: 100px;
+      } */
+      /* .box1 {
+        width: 100px;
+        background: red;
+        height: 200px;
+      }
+      .box2 {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        background: blue;
+        height: 200px;
+        margin-left: 100px;
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="box1">1</div>
+      <div class="box2">2</div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .test {
+        font-size: 16px;
+        transform: scale(0.7);
+      }
+      /* 对于不能设置高度的元素，transform无法设置，可以增加inline-block */
+      .test2 {
+        display: inline-block;
+        font-size: 16px;
+        transform: scale(0.7);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test">测试</div>
+    <span class="test2">测试</span>
+  </body>
+</html>

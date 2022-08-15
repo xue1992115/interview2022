@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .test1 {
+        /* 1、work-break */
+        width: 100px;
+        /* 任意字符间进行断行 */
+        /* word-break: break-all; */
+        /* CJK字符不断行 */
+        word-break: keep-all;
+        /* word-break: normal; */
+      }
+      .test2 {
+        /* 2、letter-spacing 设置文本字符的间距表现 */
+        letter-spacing: 2em;
+        letter-spacing: -1px;
+      }
+      .test3 {
+        /* 3、word-spacing 声明标签和单词直接的间距行为。 */
+        word-spacing: 2em;
+      }
+      .test4 {
+        width: 100px;
+        /* white-space 用于处理元素中的空白 */
+        /* 空白会被浏览器保留，不会换行 */
+        /* white-space: pre; */
+        /* 空白会被浏览器保留，会换行 */
+        /* white-space: pre-wrap; */
+        /* 不换行 */
+        /* white-space: nowrap; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test1">
+      测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
+    </div>
+    <div class="test2">
+      三大手大脚阿萨德饭卡就是看到激发思考的卷发开始戴假发开始戴假发开始剪短发开始觉得饭卡世界的看法
+    </div>
+    <div class="test3">test test</div>
+    <div class="test4">
+      test test test test test test test tets tets tets tetet tetete etetet
+    </div>
+  </body>
+</html>

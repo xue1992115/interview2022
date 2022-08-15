@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .test1 {
+        width: 200px;
+        height: 200px;
+        background: red;
+        position: relative;
+        /* 方式一： line-height */
+        /* line-height: 200px; */
+
+        /* 方式二 flex */
+        /* display: flex;
+        align-items: center; */
+
+        /* 方式三：display: table-cell */
+        /* display: table-cell;
+        vertical-align: middle; */
+      }
+      .text {
+        /* 方式四：absolute + margin: auto 0 */
+        /* height: 100px;
+        background: blue;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto 0; */
+
+        /* 方式五：absolute + transform */
+        /* height: 100px;
+        position: absolute;
+        top: 50%;
+        background: blue;
+        transform: translateY(-50px); */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test1">
+      <div class="text">打电话都接电话</div>
+    </div>
+  </body>
+</html>

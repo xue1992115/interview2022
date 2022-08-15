@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flex布局方式</title>
+  </head>
+  <style>
+    .test {
+      display: flex;
+      /* 1、容器上的属性 */
+      /* （1）排列方向：row column row-reverse column-reverse */
+      flex-direction: row;
+      /* （2）是否换行： wrap no-wrap wrap-reverse*/
+      /* flex-wrap: nowrap; */
+      flex-wrap: wrap;
+      /* （3）flex-flow 是前两个属性的缩写 */
+      /* （4）justify-content属性 定义在主轴方向的对齐方式 */
+      /* flex-start | flex-end | center | space-between | space-around; */
+      /* 居中进行排列的 */
+      /* justify-content: center; */
+      /* justify-content: start; */
+      /* justify-content: end; */
+      /* justify-content: flex-start; */
+      /* justify-content: left;
+      justify-content: right; */
+      /* 均匀排列每一个元素，首个元素放置于起点，末尾元素放置于终点 */
+      /* justify-content: space-between; */
+      /* 每个元素周围分配相同的空间 */
+      /* justify-content: space-around; */
+      /* 每个元素中间的间隔是相同的 */
+      justify-content: space-evenly;
+      /* 均匀排列每个元素'auto'-sized 的元素会被拉伸以适应容器的大小  */
+      /* justify-content: stretch; */
+      /* (5)垂直方向的排列 */
+      /* normal: 正常的排列方式 */
+      align-items: center;
+      /* 元素向侧轴起点对齐。 */
+      align-items: flex-start;
+      /* 元素向侧轴终点对齐。 */
+      align-items: flex-end;
+      /* 元素侧轴中间对齐。 */
+      align-items: center;
+    }
+    .test1 {
+      /* 项目上的属性 */
+      /*（1）order 地定义项目的排列顺序 */
+      /* (2) flex-grow 项目的放大比例*/
+      /* (3) flex-shrink 项目的缩小比例 */
+      /* (4)flex-basis 设置项目将占据的固定的空间位置 auto或者是px*/
+      /* (5)flex grow shrink basis的缩写的值 表示的是 1 
+      flex-grow: 1表示的是空间足够的时候，项目被扩大
+      flex-shrink：1表示的是空间不够的时候，项目被缩小
+      flex-basis*/
+
+      /* (6)align-self  可以设置项目单独的排列方式，可以和其他的item是不一样的*/
+      width: 300px;
+      height: 200px;
+      background: red;
+      order: 2;
+      /* flex: 1 1 0% */
+      flex: 1;
+    }
+    .test2 {
+      width: 400px;
+      height: 200px;
+      background: blue;
+    }
+    .test3 {
+      width: 500px;
+      height: 200px;
+      background: rgb(212, 255, 0);
+    }
+    .test4 {
+      width: 600px;
+      height: 200px;
+      background: rgb(15, 225, 36);
+    }
+    .test5 {
+      width: 700px;
+      height: 200px;
+      background: rgb(2, 198, 247);
+    }
+  </style>
+  <body>
+    <div class="test">
+      <div class="test1"></div>
+      <div class="test2"></div>
+      <div class="test3"></div>
+      <div class="test4"></div>
+      <div class="test5"></div>
+    </div>
+  </body>
+</html>

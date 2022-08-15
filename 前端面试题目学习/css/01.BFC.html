@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 这么写之后，父元素高度坍塌，无法包裹子元素 */
+      /* 解决办法： 1、父元素也是浮动 */
+      .baba {
+        min-height: 10px;
+        /* background-color: red; */
+        border: 1px solid #bd1000;
+        /* 1、父元素也是浮动 */
+        /* float: left; */
+        /* 2、父元素绝对定位 */
+        /* position: absolute; */
+        /* 3、父元素固定定位 */
+        /* position: fixed; */
+        /* 4、设置父元素为非块级元素 */
+        /* display: inline-block; */
+        /* 5、设置父元素overflow */
+        /* overflow: hidden; */
+        /* overflow: scroll; */
+        /* overflow: auto; */
+        /* 6、设置为表格 */
+        display: table-cell;
+        /* display: table-caption; */
+        /* display: flex; */
+        /* display: inline-flex; */
+        /* display: inline-table; */
+        /* display: flow-root; */
+        /* width: 200px;
+        height: 200px; */
+      }
+      .erzi {
+        background: pink;
+        height: 200px;
+        width: 200px;
+        float: left;
+        margin-top: 20px;
+      }
+      /* 开发中常用到BFC的场景就是：
+      阻止margin重叠
+      可以包含浮动元素 
+      两栏自适应布局
+      可以阻止元素被浮动元素覆盖
+    */
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="baba">
+        <div class="erzi">11111</div>
+      </div>
+    </div>
+  </body>
+</html>

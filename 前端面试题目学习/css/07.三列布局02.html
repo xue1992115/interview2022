@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 1、实现三列布局，两边定宽度，中间的自适应
+        （2） */
+
+      .container {
+        padding-left: 150px;
+        padding-right: 190px;
+        height: 200px;
+        /* background: red; */
+      }
+      .main {
+        float: left;
+        width: 100%;
+        height: 200px;
+        background: green;
+      }
+      .left {
+        float: left;
+        width: 190px;
+        margin-left: -100%;
+        position: relative;
+        left: -150px;
+        height: 200px;
+        background: blue;
+      }
+      .right {
+        float: left;
+        width: 190px;
+        margin-left: -190px;
+        position: relative;
+        right: -190px;
+        height: 200px;
+        background: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main"></div>
+      <div class="left"></div>
+      <div class="right"></div>
+    </div>
+  </body>
+</html>

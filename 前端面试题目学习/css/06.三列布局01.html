@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 1、实现三列布局，两边定宽度，中间的自适应
+        （1）利用float布局进行设置
+        左浮动 + 定宽
+        右浮动 + 定宽
+        中间元素设置marign + 宽度自适应
+         */
+      .left {
+        float: left;
+        width: 100px;
+        height: 200px;
+        background: red;
+      }
+      .right {
+        float: right;
+        width: 200px;
+        height: 200px;
+        background: blue;
+      }
+      .main {
+        margin-left: 120px;
+        margin-right: 220px;
+        height: 200px;
+        background: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="main"></div>
+    </div>
+  </body>
+</html>
