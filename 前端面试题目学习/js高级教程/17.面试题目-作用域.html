@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 题目一：作用域是静态的，在编写代码的时候已经确定了
+      var x = 10;
+      var x = 30;
+      function fn() {
+        console.log(x); // 10
+      }
+      function show(f) {
+        var x = 20;
+        f();
+      }
+      show(fn);
+
+      // 题目二
+      var fn3 = function () {
+        console.log(fn3); // ƒ () {console.log(fn3);}
+      };
+      fn3();
+      var obj = {
+        fn4: function () {
+          console.log(this.fn4);
+          console.log(fn4); // 报错 ReferenceError: fn4 is not defined
+        },
+      };
+      obj.fn4();
+    </script>
+  </body>
+</html>

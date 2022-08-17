@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 题目一
+      function A() {}
+      A.prototype.n = 1;
+      var b = new A();
+      console.log(b.n); // 1
+      // 迷惑我的点：prototype是一个引用类型的，这时候指向了另一个对象
+      // 因此常见的c的实例对象指向的新的， 创建的b的实例对象指向的还是之间的那个
+      A.prototype = {
+        n: 2,
+        m: 3,
+      };
+      var c = new A();
+      console.log(c.n, c.m); // 2 3
+      console.log(b.n, b.m); // 1 undefined
+
+      // 题目二
+      function F() {}
+      Object.prototype.a = function () {
+        console.log("a");
+      };
+      Function.prototype.b = function () {
+        console.log("b");
+      };
+      var f = new F();
+      // f.__proto__ == F.prototype
+      // F.prototype.__proto__ == Object.prototype
+      f.a(); // a
+      // f.__proto__ == F.prototype
+      // F.prototype.__proto__ == Object.prototype
+      // Object.prototype.__proto == null
+      f.b(); // 报错 b is not a function, 以下代码不执行
+      // F.__proto__ == Function.prototype
+      // Function.prototype.__proto == Object.prototype
+      F.a(); // a
+      F.b(); // b
+    </script>
+  </body>
+</html>

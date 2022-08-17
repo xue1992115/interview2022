@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、作用域
+        * 就是一段代码所有在区域
+        * 他是静态的，在编写代码的时候就已经确定了
+        2、分类
+        * 全局作用域
+        * 函数作用域
+        * 没有块作用域，es6的时候有了块级作用域
+        3、作用
+        * 隔绝变量，在不同作用域下，同名的变量不会冲突
+        4、作用域的个数 n + 1 n:表示定义的函数的个数 + 1
+     -->
+    <!-- 
+        1、作用域链
+        * 多个上下级关系的作用域形成的链就叫作用域链，顺序是从内到外，从下向上的
+        * 查找变量是就是沿着作用域链进行查找的
+        2、查找一个变量的查找规则
+        * 在当前作用域下的执行上下文中查找对应的属性，如果有直接返回
+        * 否则在沿着作用域链继续查找
+      -->
+    <script>
+      var a = 1;
+      function fn1() {
+        var b = 2;
+        function fn2() {
+          var c = 3;
+          console.log(c); // 3
+          console.log(b); // 2
+          console.log(a); // 1
+          console.log(d); // 报错 d is not defined
+        }
+        fn2();
+      }
+      fn1();
+    </script>
+  </body>
+</html>

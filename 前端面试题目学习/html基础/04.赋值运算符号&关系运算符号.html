@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、=
+        * 将右侧的值赋值给左侧的变量
+            * a = 10
+            * a = a+10  a += 10  a -= 10
+            
+            
+            
+        2、关系运算符
+        * 关系成立返回true，否则返回false
+        * > >= < <= == === != 
+        * 对于非数值的运算，先转换成数值的在比较
+        * 任何值和NaN进行比较都是false
+        * 特殊情况（重点记忆！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！）
+          * 如果两边都是字符串时，不会将其转换成数字，而会比较unicode的编码,比较原理就是一位一位进行比较
+          // 如果两位一样，在比较下一位
+          * 'a' < 'b' -> true  a: 97 b: 98
+          * '11' < '2' -> true 
+        * 以上就是比较大小，有的是比较编码
+        * == 和 ===
+          * == 只比较值，不比较类型
+          * === 比较值和类型 全等符号
+     -->
+    <script>
+      console.log("11" < "2", "'11' < '2'"); // true
+      console.log(true < "2", "true < '2'"); // true
+      console.log(true == "hello", "true == 'hello'"); // false
+      // 重点记忆以下的！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+      console.log(null == 0, "null == 0"); // false
+      console.log(null == "0", "null == 0"); // false
+      console.log(null == undefined, "null == undefined"); // true
+      console.log(0 == undefined, "0 == undefined"); // false
+      // NaN不和任何值相等，包括她本身
+      // 可以通过isNaN判断是不是一个NaN
+      console.log(NaN == NaN, "null == null"); // false
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、instanceof就是判断左边的是不是右边的实例
+        2、instanceof判断的原理
+        A instanceofB
+        A必须是一个对象
+        B必须上一个函数
+        就是B的显示原型在A隐式原型链上，就返回true,否则返回false
+     -->
+    <script>
+      function Foo() {}
+      var fn = new Foo();
+      console.log(fn instanceof Foo);
+      // Foo.__proto__ == Function.prototype
+      // Function.prototype.__proto__ == Object.prototype
+      // 等价于Foo.__proto__.__proto__ == Object.prototype
+      // 因此返回的是true
+      console.log(fn instanceof Object);
+    </script>
+  </body>
+</html>

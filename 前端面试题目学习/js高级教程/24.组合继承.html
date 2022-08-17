@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、借用构造函数的方法
+        * call方法 通过借用父级的构造函数
+        2、组合继承的方式
+        * 原型链的方式 + 借用父级构造函数的方式
+            * 原型链实现对父级对象上的方法的继承
+            * 利用super实现借用父级构造函数，初始化相同的属性
+    -->
+    <script>
+      // 1
+      //   function Father(name, age) {
+      //     this.name = name;
+      //     this.age = age;
+      //   }
+      //   function Child(name, age, price) {
+      //     Father.call(this, name, age);
+      //     this.price = price;
+      //   }
+      //   var child = new Child("xiaomign", 18, 90);
+      //   console.log(child);
+      // 2
+      function Father(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      Father.prototype.setName = function(name) {
+        this.name = name
+      }
+      function Child(name, age, price) {
+        Father.call(this, name, age);
+        this.price = price;
+      }
+      child.prototype = new Father()
+      var child = new Child("xiaomign", 18, 90);
+      console.log(child);
+    </script>
+  </body>
+</html>

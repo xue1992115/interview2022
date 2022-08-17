@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、一元运算符号
+        * + 不会数字产生任何影响
+        * - 会对数值进行负号取反
+        * 对于非number类型的，会先转换成number在运算
+        * 对于非number类型的，直接+变量，可以转换成数值类型的
+        2、自增符号 ++
+        * 使变量在原有的基础上增加
+        * 🐷：对于自增的会改变原变量的值，这是少数的会改变原变量的符号
+        * ++a和a++的区别
+            * 不论是++a 还是a++变量的是值都会立即加1
+            * a++ 打印a++是打印表达式的值，等于原变量的值
+            * ++a 打印a++是打印表达式的值，等于自增后的值
+        3、自减符号 --
+        * 原理同++
+     -->
+    <script>
+      var a = "123";
+      console.log(-a, "-a");
+      console.log(typeof -a, "typeof -a");
+      console.log(+a, "+a");
+      console.log(typeof +a, "typeof +a");
+      console.log(1 + "2" + 3, "1 + '2' + 3"); // 123
+      console.log(1 + +"2" + 3, "1 + +'2' + 3"); // 6
+      var b = 1;
+      console.log(b++, "b++"); // 1
+      console.log(++b, "++b"); // 3
+      var c = 20;
+      var res = c++ + ++c + c; // 20 + 22 + 22
+      console.log(res, "res");
+      var d = 20;
+      var d = d++; // 20
+      console.log(d, "d");
+    </script>
+  </body>
+</html>

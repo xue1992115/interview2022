@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、如何产生闭包
+        * 当一个嵌套的内部函数引用了嵌套的外部函数的变量，就称为闭包
+        2、闭包到底是什么呢？
+        * 使用chrome查看（我在浏览器中没有查看到不知道是什么原因？？？？？）
+        * 闭包是嵌套的内部函数
+        * 闭包包含被引用的变量
+        3、产生闭包的条件？
+        * 函数嵌套
+        * 内部函数引用了外部函数的数据
+        * 执行函数定义就会产生闭包，不需要函数执行（重点！！！！！！）
+     -->
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <script>
+      // demo1
+      var buttons = document.getElementsByTagName("button");
+      //   for (var i = 0, lengths = buttons.length; i < lengths; i++) {
+      //     buttons[i].onclick = function () {
+      //       console.log(i + 1); // 输出的结果都是3
+      //     };
+      //   }
+      // 解决方法一：保存一份变量
+      //   for (var i = 0, lengths = buttons.length; i < lengths; i++) {
+      //     var btn = buttons[i];
+      //     // 将btn对应的index保存在btn上
+      //     btn.index = i;
+      //     btn.onclick = function () {
+      //       console.log(this.index + 1); // 输出的结果都是3
+      //     };
+      //   }
+      // 解决方法二: 利用闭包
+      // 外层i是全局的变量 内层的i是局部的变量
+      for (var i = 0, lengths = buttons.length; i < lengths; i++) {
+        (function (i) {
+          buttons[i].onclick = function () {
+            console.log(i + 1); // 输出的结果都是3
+          };
+        })(i);
+      }
+      //解决方式三： let声明
+      //   for (let i = 0, lengths = buttons.length; i < lengths; i++) {
+      //     buttons[i].onclick = function () {
+      //       console.log(i + 1); // 输出的结果都是3
+      //     };
+      //   }
+
+      //   function fn() {
+      //     var a = 1;
+      //     var b = 2;
+      //     function fn2() {
+      //       console.log(a);
+      //     }
+      //     fn2();
+      //   }
+      //   fn();
+    </script>
+  </body>
+</html>

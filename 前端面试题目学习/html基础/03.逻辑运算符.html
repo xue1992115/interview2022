@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、逻辑运算符号
+        * ！
+            * 可以一个值进行非运算，所有的非运算就是对一个布尔值取反 true->false false->true
+            * 如果对非布尔值进行运算，是先转换成布尔值，在进行取反
+            * 可以利用该特性转换其他类型为布尔值，需要两次取反  !!b 
+        * &&
+            * 了解运算规则
+                * 一个为false就返回false
+                * 属于短路运算
+        * ||
+            * 了解运算规则
+                * 一个为true就返回true
+                * 属于短路运算
+        2、非布尔值的 && || （重点记忆！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！）
+        * 1 && 2 会将其转换成boolean, 在运算，但是会返回其中的一个值  ？？？？？
+            * 两个都是true，返回后边的
+            * 有一个是false，第一个false，返回后边的，第一个true返回后边的， 这个其实是短路运算
+            * 以上比较好记忆的方式就是根据短路规则，运算到哪儿就返回哪个的原值
+        * 1 || 2
+            * 同理根据规则，执行到哪儿就返回哪个
+     -->
+    <script>
+      console.log(!"1", "!1"); // false
+      console.log(!!"1"); // true
+      console.log(11 && 22, "11 && 22"); // 22
+      console.log(5 && 0, "5 && 0"); // 0
+      console.log(5 && 6, "5 && 6"); // 6
+      console.log(0 && 5, "0 && 5"); // 0
+      console.log(0 && NaN, "0 && NaN"); // 0
+      console.log(NaN && 0, "NaN && 0"); // NaN
+      console.log(NaN || 0, "NaN || 0"); // 0
+      console.log(0 || NaN, "0 || NaN"); // NaN
+      console.log(1 || 2, "1 || 2"); // 1
+      console.log(0 || 2, "0 || 2"); // 2
+      console.log(1 || 2, "1 || 2"); // 1
+      console.log("1" || true, "'1' || true"); // 1
+      console.log(true || "1", "true || '1'"); // 1
+    </script>
+  </body>
+</html>

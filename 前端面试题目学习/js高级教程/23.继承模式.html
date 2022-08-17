@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、原型链继承
+        * 子类继承父类的方式 就是子类的原型指向父类的实例对象
+     -->
+    <script>
+      function Father() {
+        this.name = "father";
+      }
+      Father.prototype.getFatherName = function () {
+        console.log(this.name);
+      };
+      function Child() {
+        this.name = "Child";
+      }
+      Child.prototype = new Father();
+      Child.prototype.getChildName = function () {
+        console.log(this.name);
+      };
+      //  关键点
+      var child = new Child();
+      console.log(child.getFatherName());
+    </script>
+  </body>
+</html>

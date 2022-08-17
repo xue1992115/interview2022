@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、语句
+            * js中的语句都成是从上往下一行一行执行的
+            * 也可以通过条件判断，执行不同的代码
+        2、流程控制语句
+            * if
+            * switch
+                * 语法
+                    switch(条件表达式){
+                        case 表达式1:
+                            语句。。。
+                            break;
+                        case 表达式2:
+                            语句。。。
+                            break;
+                        case 表达式3:
+                            语句。。。
+                            break;
+                        case 表达式4:
+                            语句。。。
+                            break;
+                        default:
+                            语句。。。
+                    }
+                * 执行流程
+                    * switch case语句会把case中的条件表达式和switch中条件表达式的结果进行全等对比
+                        * 全等比较为true，从当前true开始执行代码；往下也会执行除非遇到break会跳出执行语句；这叫case穿透
+                        * 如果比较为false，则向下进行全等比较
+                        * 如果比较结果都是false,在执行default语句
+                    * 注意：
+                        * default语句只有，全都不全等的情况下才执行
+                        * 只有break/return能解决case穿透
+
+
+            * while
+                * 语法
+                while(表达式) {
+                    语句。。。。
+                    if(表达式) {
+                        break; // 终止循环
+                    }
+                }
+                * 循环判断 三个条件 初始化 判断语句 自增/自减
+            * do...while
+                * 语法
+                do{
+                    语句。。。
+                } while(表达式)
+                * 执行流程
+                    * 一上来就执行do循环体，执行完之后，在对while表达式进行判断
+                    * 如果为true则继续执行循环体
+                    * 如果为false,则终止循环体
+                * 和while的区别就是
+                    * while是先判断后执行，do。。。while是先执行后判断
+            * for循环语句
+                * 语法
+                for(var i= 0; i < 10; i++) {
+                    语句。。。。
+                }
+        3、关键字
+        * break
+            * 可以推出switch语句和循环语句，不可用于if语句
+            * break终止理它最近的循环体，例如嵌套的循环体，只能终止离他最近的循环体
+        * continue
+            * continue可以跳出当次的循环，而break是跳出整个循环体
+     -->
+    <script>
+      var a = 11;
+      switch (a) {
+        default:
+          function fn() {
+            return 11;
+          }
+          fn();
+        case 10:
+          console.log("hahah");
+          break;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、原型链
+        * 访问一个对象属性的时候
+            * 先在自身查找，找到返回
+            * 如果自身查找不到，就沿着__proto__这条链线上查找，找到返回
+            * 如果查找不到，返回undefined
+        * 别名：隐式原型链
+        * 作用： 查找对象的属性和方法
+        2、构造函数/原型/实例对象之间的关系图解
+        图片参考：文档：https://w837w9r8m9.feishu.cn/docx/doxcnSsRtk3eF1pvatyj3L7Puqv
+     -->
+    <script>
+      function Fn() {
+        this.test1 = function () {
+          console.log("tets1");
+        };
+      }
+      Fn.prototype.test2 = function () {
+        console.log("test2");
+      };
+      var fn = new Fn();
+      fn.test1();
+      fn.test2();
+      fn.toString();
+      fn.test3(); // fn.test3 is not a function
+    </script>
+  </body>
+</html>

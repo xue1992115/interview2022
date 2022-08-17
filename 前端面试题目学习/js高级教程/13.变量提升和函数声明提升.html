@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、变量声明提升
+        * 通过var声明的变量，在定义语句之前就可以访问到
+        * 值为undefined
+        2、函数声明提升
+        * 通过函数声明的函数，在之前可以直接调用
+        * 值：函数的定义
+        3、变量提升和函数提升是如何产生的呢？
+        * 在执行代码之前会进行数据的搜集，提前为变量分配空间
+     -->
+    <script>
+      // 面试题
+      var a = 3;
+      fn();
+      function fn() {
+        console.log(a, "dkdk");
+        var a = 4;
+      }
+    </script>
+  </body>
+</html>

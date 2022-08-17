@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">test</button>
+    <!-- 
+        1、所有代码分类
+        * 初始化执行代码（同步代码）：包含绑定dom事件监听，设置定时器，发送ajax请求
+        * 回调执行代码 （异步代码）
+        2、js引擎执行代码的基本流程：
+        * 初始化代码==> 回调代码
+        3、模型的两个重要的组成部分
+        * 事件（定时器/dom事件管理模块）管理模块
+        * 回调队列 （存放一些待处理的回调函数）
+        4、模型的运转流程
+        * 执行初始化的代码，将事件的回调函数交给对应的模块去管理
+        * 当事件发生的时候，管理模块将回调函数及其数据添加到回调的队列中
+        * 只有当初始化的代码执行完成，才会有可能去执行回调队列中的回调函数
+        5、注意
+        * 定时器是先有定时器管理模块计时，等时间到了，才会将回调函数放到执行队列中，等待执行；所以时间可能不准确
+        6、相关的概念
+        * 执行栈
+            * execute stack 所有的代码都在此空间执行
+            * 浏览器的内核 
+                * browser code 
+                * js引擎模块（在主线程处理）
+                * 其他模块 （在主/分线程处理）
+            * 任务队列
+            * 消息队列
+            * 事件队列
+                * 以上是那个是callback
+            * 事件轮询
+                * event loop 从任务队列中循环取出回调函数存放在执行栈中处理
+            * 事件驱动模块
+                * 整个执行流程
+            * 请求响应模块
+                * 就是发送请求和请求响应
+     -->
+    <script>
+      function f1() {
+        console.log("f1");
+      }
+      f1();
+      setTimeout(() => {
+        console.log("setTimeout");
+      }, 1000);
+      document.getElementById("btn").onclick = function () {
+        console.log("btn-click");
+      };
+      function f2() {
+        console.log("f2");
+      }
+      f2();
+    </script>
+  </body>
+</html>
