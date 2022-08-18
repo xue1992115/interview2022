@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端页面</title>
+    <style>
+      #result {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="send">点击发送</button>
+    <button id="cancel">点击取消</button>
+    <script>
+      const send = document.getElementById("send");
+      const cancel = document.getElementById("cancel");
+      let xhr = null;
+      send.onclick = function () {
+        xhr = new XMLHttpRequest();
+        xhr.open("get", "http://127.0.0.1:3000/delay");
+        xhr.send();
+      };
+      // abort手动取消请求
+      cancel.onclick = function () {
+        xhr.abort();
+      };
+    </script>
+  </body>
+</html>

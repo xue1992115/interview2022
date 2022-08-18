@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      * ES6中的extends
+      * constructor表示构造函数，一个类中只能有一个构造函数，有多个会报出SyntaxError错误,如果没有显式指定构造方法，则会添加默认的 constructor方法，使用例子如下。
+      * 解析ES6中class中的constructor方法和super方法
+        * constructor
+          * 类的构造函数，是一个默认方法；，通过 new 命令创建对象实例时，自动调用该方法。
+        * super
+          * ES6 要求，子类的构造函数必须执行一次 super 函数，否则会报错。
+          * 因为子类没有自己的this而是继承了父类的this
+          * super代表父类的构造函数，但是返回的子类的实例；其内部的this指向的是子类
+            * 等同于一下代码 A.prototype.constructor.call(this, props) 这里的this指向的是B
+
+     -->
+    <script>
+      class Rectangle {
+        // constructor
+        constructor(height, width) {
+          this.height = height;
+          this.width = width;
+        }
+
+        // Getter
+        get area() {
+          return this.calcArea();
+        }
+
+        // Method
+        calcArea() {
+          return this.height * this.width;
+        }
+      }
+
+      const rectangle = new Rectangle(10, 20);
+      console.log(rectangle.area);
+      // 输出 200
+
+      // 继承
+      class Square extends Rectangle {
+        constructor(length) {
+          super(length, length);
+
+          // 如果子类中存在构造函数，则需要在使用“this”之前首先调用 super()。
+          this.name = "Square";
+        }
+
+        get area() {
+          return this.height * this.width;
+        }
+      }
+
+      const square = new Square(10);
+      console.log(square.area);
+      // 输出 100
+    </script>
+  </body>
+</html>

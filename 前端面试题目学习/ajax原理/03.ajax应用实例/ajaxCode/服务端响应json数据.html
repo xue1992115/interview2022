@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端页面</title>
+    <style>
+      #result {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1、要实现的功能，就是点击发送请求 -> 服务器响应 -> 展示在前端页面 -->
+    <!-- 2、前端解析json格式的数据
+    * 手动JSON.parse解析
+    * 自动转换 设置xhr.responseType = 'json' -->
+    <button id="btn">点击发送请求</button>
+    <div id="result"></div>
+    <script>
+      const dom = document.getElementById("btn");
+      const dom2 = document.getElementById("result");
+      dom.onclick = function () {
+        // 1、创建ajax对象
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "json";
+        // 2、初始化（设置请求方法和url&设置请求参数）
+        xhr.open("GET", "http://127.0.0.1:3000/json");
+        // 3、发送
+        xhr.send();
+        // 4、处理响应的结果
+        // readystate: 0 未初始化 1:open方法调用了 2:send方法调用了 3:服务端返回部分结果 4:服务端返回所有的结果
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // ajax可以拿到所有的响应的数据
+            console.log(xhr.status); // 响应的状态码
+            console.log(xhr.statusText); // 响应的状态文案
+            console.log(xhr.getAllResponseHeaders()); // 响应的头部信息
+            console.log(xhr.response); // 响应体
+            // dom2.innerHTML = JSON.parse(xhr.response).name;
+            dom2.innerHTML = xhr.response.name + "+" + xhr.response.age;
+          } else {
+          }
+        };
+      };
+    </script>
+  </body>
+</html>

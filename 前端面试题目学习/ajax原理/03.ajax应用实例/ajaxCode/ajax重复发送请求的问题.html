@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端页面</title>
+    <style>
+      #result {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 每点击一次就会重复发送请求 -->
+    <button id="send">点击发送</button>
+    <script>
+      const send = document.getElementById("send");
+      const cancel = document.getElementById("cancel");
+      let xhr = null;
+      let isSend = false;
+      send.onclick = function () {
+        // if (isSend) xhr.abort();
+        if (isSend) return;
+        xhr = new XMLHttpRequest();
+        xhr.open("get", "http://127.0.0.1:3000/delay");
+        xhr.send();
+        isSend = true;
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            isSend = false;
+          } else {
+          }
+        };
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、创建对象
+        * Array + new
+        * 字面量的方式
+        * 数组的元素可以是任意的元素
+        2、数组的方法
+        * push,尾部添加元素，返回新的长度,原数组会改变
+        * pop,删除尾部元素，返回删除的元素,原数组会改变
+        * unshift,头部添加元素，返回新的长度,原数组会改变
+        * shift,删除头部元素，返回删除的元素,原数组会改变
+        * slice 截取部分数组，返回生成新数组，slice(0,1) 前闭后开，原数组不变
+        * splice 删除数组中的部分元素，返回删除的元素，原数组改变
+        * cancat 合并成多个数组，返回新的数组，原数组不变,不重复
+        * join 转换字符串，原数组不变
+        * reverse 反转数组，原数组改变
+        * sort排序 原数组改变
+        3、数组的遍历 
+        * map
+            * 返回一个新的数组，没有return,每个item都是undefined,有元素则会返回的值
+            * 原数组不改变
+        * forEach
+            * 返回undefined
+            * 原数组不改变
+        * for循环
+     -->
+    <script>
+      var arr = [1, 2, 3, "4", null, undefined];
+      var arrB = [null, null, null, null, null, null];
+      console.log(arr.length);
+      console.log(arrB.length);
+      console.log(arrB.push(2), 'push');
+      console.log(arrB, 'push');
+      console.log(arrB.pop(), 'pop');
+      console.log(arrB, 'arrB');
+      console.log(arrB.unshift('3'), 'unshift');
+      console.log(arrB, 'arrB');
+      console.log(arrB.shift(), 'shift');
+      console.log(arrB, 'arrB');
+      var arrC = arrB.map((item) => {
+        // item = 0;
+       return item = 0;
+      })
+      console.log(arrB, 'arrB map');
+      console.log(arrC, 'arrC map');
+      var arrD = arrB.forEach((item) => {
+    //    item = 0;
+       return item = 0;
+      })
+      console.log(arrB, 'arrB forEach');
+      console.log(arrD, 'arrD forEach');
+
+      var arrE = [1,2,3]
+      var arrF = arrE.slice(0,1)
+      console.log(arrF, 'arrF slice');
+      console.log(arrE, 'arrE slice');
+      var arrG = arrE.splice(0,2)
+      console.log(arrG, 'arrG splice');
+      console.log(arrE, 'arrE splice');
+      
+      var arrH = arrG.concat(arrE);
+      console.log(arrG, 'arrG concat');
+      console.log(arrH, 'arrH concat');
+      console.log(arrH.reverse(), 'arrH reverse');
+      console.log(arrH, 'arrH');
+      console.log(arrH.join(','), 'arrH join');
+      console.log(arrH, 'arrH');
+      console.log(arrH.sort(), 'arrH sort');
+      console.log(arrH, 'arrH');
+    </script>
+    </script>
+  </body>
+</html>

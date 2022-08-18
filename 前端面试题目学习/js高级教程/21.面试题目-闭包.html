@@ -34,7 +34,35 @@
       //   };
       //   console.log(obj.getName()()); // cccc
 
-      //   题目三
+      //   题目三 用闭包模拟块级作用域
+      function outputNumbers(count) {
+        (function () {
+          for (var i = 0; i < count; i++) {
+            alert(i);
+          }
+        })();
+        alert(i); //导致一个错误！
+      }
+      outputNumbers(10);
+      // 题目四 创建私有变量
+      var aaa = (function () {
+        var a = 1;
+        function bbb() {
+          a++;
+          console.log(a);
+        }
+        function ccc() {
+          a++;
+          console.log(a);
+        }
+        return {
+          b: bbb, //json结构
+          c: ccc,
+        };
+      })();
+      console.log(aaa.a); //undefined
+      aaa.b(); //2
+      aaa.c(); //3
     </script>
   </body>
 </html>

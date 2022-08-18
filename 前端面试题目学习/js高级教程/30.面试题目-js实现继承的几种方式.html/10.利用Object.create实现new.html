@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        参考文章：https://blog.csdn.net/seafishyls/article/details/102472279
+        1、先了解一下new的过程
+        * 创建空对象
+        * 设置对象的原型obj.__proto__ = Person.prototype
+        * 将this指向obj，以obj为上下文执行构造函数
+    -->
+    <script>
+      // 实现new过程
+      function objectCreator(func) {
+        // 1、创建一个空对象
+        // 2、并将空对象的原型设置为构造函数的原型
+        var obj = Object.create(func.prototype);
+        // 以obj为上下文执行构造函数
+        var newObj = func.call(obj);
+        // 如果构造函数有返回结果，则返回，若无直接返回obj
+        if (typeof newObj == "object") {
+          return newObj;
+        } else {
+          return obj;
+        }
+      }
+
+      function Person() {}
+      var f = objectCreator(Person); // 这句话等价于 new Person()
+    </script>
+  </body>
+</html>

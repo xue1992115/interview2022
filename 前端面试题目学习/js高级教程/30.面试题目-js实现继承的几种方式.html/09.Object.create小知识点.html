@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        参考文章：https://blog.csdn.net/seafishyls/article/details/102472279
+        1、Object.create
+        * 作用： 创建一个空对象
+        * 和{}的区别
+        * 很多源码框架上使用Object.create(null)的原因
+            * 干净，不用担心原型链上的方法同名被覆盖
+            * for in会遍历原型链的属性，会带来性能上的损耗
+        2、手写Object.create()
+
+     -->
+    <script>
+      var b = {};
+      var c = Object.create(null);
+      // 分别输出两个对象
+      console.log(b, "b"); // b.__ptoto__ 指向的Object.prototype 同时包含了toString,hasOwnProperty等方法
+      console.log(c, "c"); // Object创建式一个无属性的干净的对象
+
+      // create并不是在原型上的，直接判断是否有这个方法
+      if (typeof Object.create !== "function") {
+        Object.create = function (proto, properties) {
+          // 判断类型，第一个参数传入的必须是 object, function
+          if (typeof proto !== "object" && typeof proto !== "function") {
+            throw new TypeError(
+              "Object prototype may only be an Object: " + proto
+            );
+          }
+          // 这个判断可有可无，至少在chrome中是允许传入null的
+          // else if (proto === null) {
+          //   throw new Error(
+          //     "This browser's implementation of Object.create is a shim and doesn't support 'null' as the first argument."
+          //   );
+          // }
+
+          // 简单的实现的过程，忽略了properties
+          var func = function () {};
+          func.prototype = proto; // 将fn的原型指向传入的proto
+          return new func(); // 返回创建的新对象，这里思考下，new func() 又做了什么事情呢？且往下看！
+        };
+      }
+      // new func() 做了哪些操作呢？（也就是new的原理）
+      // 创建空对象obj;
+      // 将obj的原型设置为构造函数的原型，obj.__proto__= func.prototype;
+      // 以obj为上下文执行构造函数，func.call(obj);
+      // 返回obj对象。
+    </script>
+  </body>
+</html>

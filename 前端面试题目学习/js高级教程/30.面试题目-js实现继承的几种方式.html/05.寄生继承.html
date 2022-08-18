@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      * 寄生继承
+        * 寄生就是在原型式的基础上，增强对象，返回构造函数
+        * 缺点：
+          * 原型链上的继承多个实例的引用类型属性指向相同，存在篡改的可能。
+          * 无法传递参数
+     -->
+    <script>
+      // 返回空对象
+      function object(obj) {
+        function F() {}
+        F.prototype = obj;
+        // 返回一个空对象
+        // 空对象的
+        return new F();
+      }
+      function createAnother(original) {
+        var clone = object(original); // 通过调用 object() 函数创建一个新对象
+        clone.sayHi = function () {
+          // 以某种方式来增强对象
+          console.log("hi");
+        };
+        return clone; // 返回这个对象
+      }
+      var person = {
+        name: "Nicholas",
+        friends: ["Shelby", "Court", "Van"],
+      };
+      var anotherPerson = createAnother(person);
+      anotherPerson.sayHi(); //"hi"
+    </script>
+  </body>
+</html>

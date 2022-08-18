@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端页面</title>
+    <style>
+      #result {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1、要实现的功能，就是鼠标放在div上发送post请求 -> 服务器响应 -> 展示在前端页面 -->
+    <div id="result"></div>
+    <script>
+      const dom2 = document.getElementById("result");
+      dom2.onmouseover = function () {
+        // 1、创建ajax对象
+        const xhr = new XMLHttpRequest();
+        // 2、初始化（设置请求方法和url&设置请求参数）
+        xhr.open("post", "http://127.0.0.1:3000/server");
+        // 2.1、设置请求头
+        // 设置请求体内容的类型
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+        // 也可以添加自定义的请求头，就会触发预检请求，需要服务端去设置
+        xhr.setRequestHeader("name", "hxx");
+
+        // 3、发送 post通过send发送请求参数，参数类型可以是任意的
+        xhr.send("a=100&b=200");
+        // 4、处理响应的结果
+        // readystate: 0 未初始化 1:open方法调用了 2:send方法调用了 3:服务端返回部分结果 4:服务端返回所有的结果
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // ajax可以拿到所有的响应的数据
+            console.log(xhr.status); // 响应的状态码
+            console.log(xhr.statusText); // 响应的状态文案
+            console.log(xhr.getAllResponseHeaders()); // 响应的头部信息
+            console.log(xhr.response); // 响应体
+            dom2.innerHTML = xhr.response;
+          } else {
+          }
+        };
+      };
+    </script>
+  </body>
+</html>

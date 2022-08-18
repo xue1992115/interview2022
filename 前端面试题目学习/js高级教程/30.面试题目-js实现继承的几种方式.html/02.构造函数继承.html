@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      * 构造函数实现继承（本质的原理就是复制一份）
+        * 利用父级的构造函数，等同于将父级构造函数中的方法/属性复制一份给实例
+        * 存在的问题：
+          * 只能继承父类的属性和方法，不能继承原型上的属性和方法
+          * 无法实现复用，每个子类都有父类实例函数的副本，影响性能
+     -->
+    <script>
+      function Father(name, age) {
+        this.name = name;
+        this.age = age;
+        this.color = ["red", "blue"];
+        this.getName = function () {
+          return this.name;
+        };
+      }
+      function Child(name, age) {
+        // 使用call调用父级的构造函数
+        // 重点记忆！！！！！！！！！！！！
+        // 这是核心的代码
+        Father.call(this, name, age);
+      }
+
+      var child = new Child("张三", 19);
+      // 修改引用类型的实例
+      child.color.push("yellow");
+      console.log(child.name, "---child.name");
+      console.log(child.age, "---child.age");
+      console.log(child.color, "---child.color");
+      // console.log(child.getName(), "---child.getName"); // 报错
+      console.log("----------------------------------------------------------");
+      var child2 = new Child("张三2", 20);
+      console.log(child2.name, "---child2.name");
+      console.log(child2.age, "---child2.age");
+      console.log(child2.color, "---child2.color");
+      // console.log(child2.getName(), "---child.getName");
+
+      console.log(child.color === child2.color, "child.color === child2.color"); // false
+      console.log(
+        child.getName === child2.getName,
+        "child.getName === child2.getName"
+      ); // false
+    </script>
+  </body>
+</html>

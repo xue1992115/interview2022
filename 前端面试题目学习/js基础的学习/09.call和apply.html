@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、call()和apply()
+        * 这两个方法都是函数的方法，需要通过函数对象来调用
+        * 当对函数调用call和apply，都会调用函数执行
+        * 在调用call和apply，可以将对象指定为第一个参数,后续的的函数的参数
+            * 此时对象将会成为函数执行时的this
+            * 注意apply需要将参数封装到一个数组中
+                * fn.call(obj, 1,2,3)
+                * fn.apply(obj, [1,2,3]
+            * 注意和bind的区别，bind会返回一个改变上下文的函数，但是不执行
+        2、函数中的arguments
+        * arguments是一个类数组
+        * arguments.length 用来获取实际参数的长度
+        * 即使不定义形参，也可以通过argument获取实参
+        * arguments有一个属性
+            * callee arguments.callee表示的当前正在调用的函数对象
+
+     -->
+    <script>
+      function fn(a, b, c) {
+        console.log(a, b, c, "a,b,c");
+        console.log(arguments, "arguments");
+        console.log(arguments.length, "arguments.length"); // 实参的个数
+        console.log(arguments.callee, "arguments.callee"); // 返回函数fn
+      }
+      fn(1, 2, 3);
+    </script>
+  </body>
+</html>

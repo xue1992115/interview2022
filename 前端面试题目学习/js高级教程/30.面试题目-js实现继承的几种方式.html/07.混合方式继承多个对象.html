@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      * 混入方式继承多个对象
+      * Object.assign会把 OtherSuperClass原型上的函数拷贝到 MyClass原型上，使 MyClass 的所有实例都可用 OtherSuperClass 的方法。
+     -->
+    <script>
+      function MyClass() {
+        SuperClass.call(this);
+        OtherSuperClass.call(this);
+      }
+
+      // 继承一个类
+      MyClass.prototype = Object.create(SuperClass.prototype);
+      // 混合其它
+      Object.assign(MyClass.prototype, OtherSuperClass.prototype);
+      // 重新指定constructor
+      MyClass.prototype.constructor = MyClass;
+
+      MyClass.prototype.myMethod = function () {
+        // do something
+      };
+    </script>
+  </body>
+</html>

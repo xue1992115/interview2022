@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      * 原型式继承
+        * 原理
+          * 创建一个函数
+          * 函数入参：是一个对象，作为空对象的构造函数的原型
+          * 函数功能：返回一个空对象（通过构造函数new一个空对象）
+          * object()对传入其中的对象执行了一次******浅复制*******，将构造函数F的原型直接指向传入的对象。
+        * 缺点：
+          * 创建多个实例对象，引用类型的属性相同，存在篡改风险
+          * 无法传递参数
+
+     -->
+    <script>
+      // 该方法可以使用Object.create()方法代替
+      // Object.create()的了解参见09.Object.create小知识点
+      function object(obj) {
+        function F() {}
+        F.prototype = obj;
+        // 返回一个空对象
+        // 空对象的
+        return new F();
+      }
+      // console.log(object({}));
+      var person = {
+        name: "Nicholas",
+        friends: ["Shelby", "Court", { name: "张三" }],
+        getName: function () {
+          return this.name;
+        },
+      };
+
+      // var anotherPerson = object(person);
+      var anotherPerson = Object.create(person);
+      console.log(anotherPerson, "anotherPerson");
+      anotherPerson.friends.push("Meng");
+      console.log(anotherPerson.name, "---anotherPerson.name");
+      console.log(anotherPerson.friends, "---anotherPerson.friends");
+      console.log(anotherPerson.getName(), "---anotherPerson.getName");
+
+      console.log("--------------------------------------------------");
+
+      // var yetAnotherPerson = object(person);
+      var yetAnotherPerson = Object.create(person);
+      yetAnotherPerson.name = "Linda";
+      yetAnotherPerson.friends.push("Barbie");
+      console.log(yetAnotherPerson.name, "---yetAnotherPerson.name");
+      console.log(yetAnotherPerson.friends, "---yetAnotherPerson.friends");
+      console.log(yetAnotherPerson.getName(), "---yetAnotherPerson.getName");
+    </script>
+  </body>
+</html>

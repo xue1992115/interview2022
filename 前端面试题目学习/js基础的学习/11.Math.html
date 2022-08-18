@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、 Math是一个工对象，不是一个函数对象，因此不用创建对象
+        * 属性
+            * 参考文档
+        * 方法
+            * abs() 绝对值
+            * ceil() 向上取整
+            * floor() 向下取整
+            * round() 四舍五入
+            * random() 随机数
+            * max() 最大值
+            * min() 最小值
+            * power(x, y) x的y次幂
+            * sqrt(x) 开根号 
+     -->
+    <script>
+      console.log(Math.PI); // 3.141592654......
+      console.log(Math.abs(-1)); // 1
+      console.log(Math.ceil(9.34444)); // 10
+      console.log(Math.floor(9.34444)); // 9
+      console.log(Math.round(9.34444)); // 9
+      console.log(Math.round(9.994)); // 10
+      console.log(Math.random()); // 0~1 (0,1)
+      //  生成0～x随机数 Math.round(Math.random() * x)
+      console.log(Math.round(Math.random() * 10)); // 0~10 (0,10)之间的随机数
+
+      // 生成 1～10
+      console.log(Math.round(Math.random() * 9) + 1);
+      // 规律 生成x~y之间随机数
+      // Math.round(Math.random() * (y - x)) + x;
+
+      console.log(Math.max(1, 2, 3));
+      console.log(Math.min(1, 2, 3));
+    </script>
+  </body>
+</html>

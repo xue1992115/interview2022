@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      八种方式参考的文章：https://juejin.cn/post/6844903696111763470#heading-9
+        * 原型链继承
+            * 原理：是利用原型让一个引用类型继承另一个引用类型的属性和方法
+            * 存在的问题：
+                * 引用类型的属性被所有的实例共享， 其中一个修改会影响其他的实例
+                * 此时子类的constructor也指向了父类
+                * 且不能传递给父级参数
+     -->
+    <script>
+      // 1、原型链继承
+      function Father(name, age) {
+        this.name = name;
+        this.age = age;
+        this.color = ["red", "blue"];
+      }
+      Father.prototype.getName = function () {
+        return this.name;
+      };
+      function Child() {}
+      Child.prototype = new Father("张三", 19);
+
+      var child = new Child();
+      // 修改引用类型的实例
+      child.color.push("yellow");
+      console.log(Child.prototype.constructor, "Child.prototype.constructor"); // 构造函数是Father
+      console.log(child.name, "---child.name");
+      console.log(child.age, "---child.age");
+      console.log(child.color, "---child.color");
+      console.log(child.getName(), "---child.getName");
+
+      console.log("----------------------------------------------------------");
+
+      var child2 = new Child();
+      console.log(child2.name, "---child2.name");
+      console.log(child2.age, "---child2.age");
+      console.log(child2.color, "---child2.color");
+      console.log(child2.getName(), "---child.getName");
+
+      console.log(child.color === child2.color, "child.color === child2.color"); // true
+      console.log(
+        child.getName === child2.getName,
+        "child.getName === child2.getName"
+      ); // true
+    </script>
+  </body>
+</html>

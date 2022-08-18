@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      * 寄生组合式的继承
+      * 借用构造函数传递参数和寄生模式实现继承
+     -->
+    <script>
+      // 父类初始化实例属性和原型属性
+      function Father(name, age) {
+        this.name = name;
+        this.age = age;
+        this.colors = ["red", "blue", "green"];
+      }
+      Father.prototype.getName = function () {
+        return this.name;
+      };
+
+      // 借用构造函数传递增强子类实例属性（支持传参和避免篡改）
+      function Child(name, age) {
+        Father.call(this, name, age);
+      }
+      function inheritPrototype(Child, Father) {
+        var prototype = Object.create(Father.prototype); // 创建对象，创建父类原型的一个副本
+        prototype.constructor = Child; // 增强对象，弥补因重写原型而失去的默认的constructor 属性
+        Child.prototype = prototype; // 指定对象，将新创建的对象赋值给子类的原型
+      }
+
+      // 将父类原型指向子类
+      inheritPrototype(Child, Father);
+
+      // 新增子类原型属性
+      Child.prototype.getAge = function () {
+        console.log(this.age);
+      };
+
+      var instance1 = new Child("xyc", 23);
+      var instance2 = new Child("lxy", 23);
+
+      instance1.colors.push("2"); // ["red", "blue", "green", "2"]
+      instance1.colors.push("3"); // ["red", "blue", "green", "3"]
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      * 组合继承
+        * 原理：就是使用原型链和构造函数的继承
+          * 原型链实现对方法的继承
+          * 构造函数实现对属性继承
+        * 缺点
+          * Child.prototype = new Father(); 第一次调用Father，给Child.prototype上添加了name、age、color
+          * var child = new Child("张三", 19); Father.call(this, name, age); 第二次调用Father,给child实例上添加了name、age、color
+          * 因此造成了原型中会存在两份相同的属性/方法
+     -->
+    <script>
+      function Father(name, age) {
+        this.name = name;
+        this.age = age;
+        this.color = ["red", "blue"];
+      }
+      Father.prototype.getName = function () {
+        return this.name;
+      };
+      // 继承方法
+      Child.prototype = new Father();
+      // 继承属性
+      function Child(name, age) {
+        Father.call(this, name, age);
+      }
+      // 需要重新指定构造函数
+      Child.prototype.constructor = Child;
+      var child = new Child("张三", 19);
+      // 修改引用类型的实例
+      child.color.push("yellow");
+      console.log(Child.prototype.constructor, "Child.prototype.constructor"); // 构造函数是Child
+      console.log(child.name, "---child.name");
+      console.log(child.age, "---child.age");
+      console.log(child.color, "---child.color");
+      console.log(child.getName(), "---child.getName");
+
+      console.log("----------------------------------------------------------");
+
+      var child2 = new Child("张三2", 20);
+      console.log(child2.name, "---child2.name");
+      console.log(child2.age, "---child2.age");
+      console.log(child2.color, "---child2.color");
+      console.log(child2.getName(), "---child.getName");
+
+      console.log(child.color === child2.color, "child.color === child2.color"); // false
+      console.log(
+        child.getName === child2.getName,
+        "child.getName === child2.getName"
+      ); // true
+      console.log(child); // 实例和实例的原型上保存了相同属性
+    </script>
+  </body>
+</html>
