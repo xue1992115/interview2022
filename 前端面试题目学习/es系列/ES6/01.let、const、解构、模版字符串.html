@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、声明变量
+        * let
+            * 不能重复声明同一个变量
+            * 块级作用域
+                * {}
+                * if语句
+                * 循环语句中
+                * 不存在变量提升
+                *  不影响作用域链
+            * 经典的案例
+        * const 
+            * 声明常量，常量不能修改,不能重复声明同一个变量名
+            * 必须初始化
+            * 默认常量使用大写的（非必须）
+            * 块级作用域
+            * 数组和对象的修改，不算是对常量修改，因为常量存储的数组和对象的地址值，地址值没有发生改变
+        2、变量解构赋值
+            * 数组解构赋值
+            * 对象解构赋值
+            * 赋值变量的别名
+        3、模版字符串
+            * 内容中可以出现换行符号
+            * 变量的拼接
+     -->
+    <div class="text">1</div>
+    <div class="text">2</div>
+    <div class="text">3</div>
+    <div class="text">4</div>
+    <div class="text">5</div>
+    <script>
+      //   console.log(a); //Cannot access 'a' before initialization
+      let a = 12;
+      //   let a = 22;
+      {
+        const age = 18;
+      }
+      //   console.log(age, "age"); //ReferenceError: age is not defined
+
+      var arr = document.getElementsByClassName("text");
+      console.log(arr, "arr");
+      for (let i = 0, len = arr.length; i < len; i++) {
+        arr[i].onclick = function () {
+          console.log(i);
+        };
+      }
+
+      // const
+      const test = 1;
+
+      // 解构赋值
+      let ff = [1, 2, 3, 4];
+      const [f1, f2, f3, f4] = ff;
+      console.log(f1, f2, f3, f4);
+
+      let ee = { e1: 1, e2: 2 };
+      const { e1, e2 } = ee;
+      console.log(e1, e2);
+    </script>
+  </body>
+</html>

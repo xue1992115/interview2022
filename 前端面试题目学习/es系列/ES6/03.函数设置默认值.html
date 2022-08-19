@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、给函数设置默认值
+            * 只有传递undefined的之后，默认值才起作用
+        2、参数可以和解构结合
+     -->
+    <script>
+      function a(b = 10) {
+        console.log(b);
+      }
+      //   a(undefined);
+      a();
+    </script>
+  </body>
+</html>

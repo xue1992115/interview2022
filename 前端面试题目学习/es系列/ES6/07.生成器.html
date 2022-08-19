@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、Generator
+        * 本身是一个函数，用来进行异步编程，纯回调函数，解决回调地狱问题
+     -->
+    <script>
+      function* gen() {
+        console.log("gen");
+        // yield是函数代码的分隔符号
+        yield console.log("1111");
+        console.log("2222");
+        yield console.log("3333");
+        yield console.log("4444");
+      }
+      const iterator = gen(); // 执行之后生成一个迭代器
+      //   console.log(iterator);
+      //   iterator.next(); // 调用next方法，执行到第一个yield后变的语句
+      //   iterator.next(); // 调用next方法，执行到第二个yield后变的语句
+      //   iterator.next(); // 调用next方法，执行到第三个yield后变的语句
+      //   iterator.next(); // 结束
+      // 上述的next方法是可以传递参数的
+      for (let v of gen()) {
+        console.log(v);
+      }
+    </script>
+  </body>
+</html>

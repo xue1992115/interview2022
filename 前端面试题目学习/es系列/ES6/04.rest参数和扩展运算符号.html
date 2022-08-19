@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、rest参数
+        * rest参数获取剩余的参数
+        * rest必须放在参数最后
+        * 结构对象和数组
+        2、扩展运算符号
+        * ...
+     -->
+    <script>
+      function test(a, ...args) {
+        console.log(args);
+      }
+      test("djdjd", "d", 88);
+      console.log(...[1, 2, 3]);
+      console.log({ sex: "男", ...{ name: 1, age: 3 } });
+    </script>
+  </body>
+</html>

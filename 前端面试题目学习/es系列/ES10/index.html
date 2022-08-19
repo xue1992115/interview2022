@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        es10
+        1、Object.fromEntries()
+        * 传入二维数组，返回一个生成的对象
+        * 可以将Map定义的数据，转化为一个对象
+        2、字符串的方法
+        * trimStart() '      in      '.trimStart()
+        * trimEnd() '      in      '.trimEnd()
+        3、flat和flatMap
+        * flat
+            * 将多维数组拍平
+                * 三维转二维
+                * 二维转一纬
+            * 生成一个新数组，原数组不变
+        * flatMap
+            * 相当于是一个map和flat的结合
+        4、Symbol.prototype.description 
+        * 获取Symbol的属性
+        * new Symbol('nihao') => Symbol.prototype.description  => nihao
+        5、
+     -->
+    <script>
+      const res = Object.fromEntries([
+        ["name", "xiaoming"],
+        ["xueke", "shuxue,yunwen"],
+      ]);
+      console.log(res, "res");
+      const m = new Map();
+      m.set("name", "cehis");
+      console.log(m, "m");
+      console.log(Object.fromEntries(m), "fromEntries");
+
+      const arr = [1, 2, 3, [3, [5, 6, 7], 5], 7, 7, 8];
+      console.log(arr.flat());
+      console.log(arr);
+
+      const arr2 = [1, 2, 3, 4, 5];
+      const res2 = arr2.map((item) => item * 10);
+      const res3 = arr2.flatMap((item) => [item * 10]);
+      console.log(res2, "res2");
+      console.log(res3, "res3");
+    </script>
+  </body>
+</html>

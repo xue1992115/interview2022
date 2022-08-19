@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+    1、Object.is()判断两个值是否完全相等
+    * 和===的区别
+        * Object.is(NaN, NaN) => true
+        * NaN === NaN => false
+    2、Object.assign() 对象的合并
+    * 将第二个对象合并到第一个对象中，如果属性名相同，后边的覆盖前面的
+    * 然后返回一个新的对象
+    3、Object.setPrototypeOf和Object.getPrototypeOf
+    * setPrototypeOf设置原型对象Object.setPrototypeOf(obj4, obj5); 将obj5设置到obj4的原型对象上
+    * getPrototypeOf获取原型对象Object.getPrototypeOf(obj4) 获取obj4的原型对象
+ -->
+    <script>
+      const obj1 = {
+        name: "obj1",
+        age: 1,
+        height: 168,
+      };
+      const obj2 = {
+        name: "obj2",
+        age: 2,
+        name1: "test",
+        age2: 132,
+      };
+      const obj3 = Object.assign(obj1, obj2);
+      console.log(obj3, "obj3");
+      const obj4 = {
+        name: "obj2",
+        age: 2,
+        name1: "test",
+        age2: 132,
+      };
+      const obj5 = {
+        say: "nihao",
+      };
+      Object.setPrototypeOf(obj4, obj5);
+      console.log(obj4, "obj4");
+      console.log(Object.getPrototypeOf(obj4), "obj4");
+    </script>
+  </body>
+</html>

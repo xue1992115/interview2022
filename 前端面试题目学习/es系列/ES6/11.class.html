@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、class
+        * 创建一个类，实例化对象
+        * 构造函数 constructor
+        * 静态成员
+            * 静态属性和静态方法
+            * 静态成员是属于类的，不属于实例对象
+        * ES6实现继承
+            * extends
+        * 子类可以对父类的方法进行重写
+          * 在子类通过定义一个同名的方法，进行重写
+        * class中的get和set
+          * get就是获取该属性的值，如果绑定的时方法，就是获取该方法执行后的值
+          * set
+
+
+     -->
+    <script>
+      // es5的方式去实例化对象 构造函数的方式
+      function Phone(name, version) {
+        this.name = name;
+        this.version = version;
+      }
+      Phone.prototype.call = function () {
+        return this.name;
+      };
+      let phone1 = new Phone("华为", "1.0");
+      console.log(phone1, "phone1");
+      // es6的方式去实例化对象 class方式
+      class Phone2 {
+        // 构造函数
+        constructor(name, version) {
+          this.name = name;
+          this.version = version;
+        }
+        static price = 200;
+        // 方法使用这个语法 方法名() {}
+        call() {
+          return this.name;
+        }
+        static changePrice() {
+          console.log("价格改变啦！！！");
+        }
+      }
+      const phone2 = new Phone2("三星", "1.2");
+      console.log(phone2, "phone2");
+      console.log(phone2.price, "phone2.price"); // undefined
+      console.log(Phone2.price, "Phone2.price");
+      console.log(Phone2.changePrice, "Phone2.changePrice");
+
+      class Phone3 extends Phone2 {
+        constructor(name, version, color) {
+          super(name, version);
+          this.color = color;
+        }
+        get date() {
+          console.log(new Date());
+        }
+        set date(val) {
+          console.log(val, "时间改变啦");
+        }
+        call() {
+          console.log(this.color, "color");
+        }
+      }
+      const phone5 = new Phone3("iphone", "14", "绿色");
+      console.log(phone5, "phone5");
+      phone5.call();
+      console.log(phone5.date, "获取date，就进行执行");
+      phone5.date = "20220819";
+    </script>
+  </body>
+</html>

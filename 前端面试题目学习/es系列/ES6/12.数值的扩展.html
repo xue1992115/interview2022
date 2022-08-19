@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、Number.EPSILON 表示的是js中的最小的精度值
+        * 常用就是如果两个数的差值小于这个精度，就代表着两个数相等
+        * 只要用于浮点数的精度运算
+        2、二进制和八进制
+        * 二进制 0b开头的
+        * 八进制 0开头的
+        * 十六进制 0x开头的
+        3、Number.isFinite()检测一个数是否为有限数
+        4、Number.isNaN() 检测是不是NaN
+        5、Number.parseInt(值, 进制) 转换成整数
+        6、Number.parseFloat(值，保留小数位) 转换成浮点数
+        7、Number.isInterager()判断是否为整数
+        8、Math.trunc()将数字的小数部分抹掉
+        9、Math.sign()判断是否为正数 正数1 0 负数-1
+
+     -->
+    <script>
+      console.log(0.1 + 0.2 === 0.3); // false
+      function equal(a, b) {
+        if (Math.abs(a - b) < Number.EPSILON) {
+          return true;
+        }
+        return false;
+      }
+      let res = equal(0.1 + 0.2, 0.3);
+      console.log(res, "res"); // true
+    </script>
+  </body>
+</html>

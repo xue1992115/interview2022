@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、迭代器
+        * 是一种接口，为各种不同的数据类型提供统一的访问机制
+        * 任何数据结构，只要部署了iterator接口，就可以实现遍历
+        * 主要供for...of进行消费   
+            * for...of对键值进行遍历
+            * for...in对键名进行遍历
+        * 迭代器的工作原理
+            * 创建一个指针对象，指向当前数据结构的起始位置
+            * 第一次调用对象的next方法，指针自动指向数据结构的第一个成员
+            * 以后每次调用next方法，指针就向后移动到下一个成员
+            * 每次调用next方法，都会返回一个对象。包含value和done属性
+        * 应用场景
+            * 需要自定遍历数据的时候，要想到迭代器
+            * demo 迭代器自定义遍历对象
+
+     -->
+    <script>
+      const xiaoyou = ["1", "2", "3", "4"];
+      let iterator = xiaoyou[Symbol.iterator]();
+      console.log(iterator.next()); // {value: '1', done: false}
+      console.log(iterator.next()); // {value: '2', done: false}
+      console.log(iterator.next()); // {value: '3', done: false}
+      console.log(iterator.next()); // {value: '4', done: false}
+      console.log(iterator.next()); // {value: undefined, done: true}
+      // 以下是实现自定义的遍历数据
+      let myIterable = {
+        a: 1,
+        b: 2,
+        c: 3,
+      };
+      myIterable[Symbol.iterator] = function () {
+        let self = this;
+        let arr = Object.keys(self);
+        let index = 0;
+        return {
+          next() {
+            return index < arr.length
+              ? { value: self[arr[index++]], done: false }
+              : { value: undefined, done: true };
+          },
+        };
+      };
+      var it = myIterable[Symbol.iterator]();
+      for (const i of myIterable) {
+        console.log(i);
+      }
+    </script>
+  </body>
+</html>

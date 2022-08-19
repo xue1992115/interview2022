@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、Set
+        * 是一个构造函数
+        * 类型是一个对象
+        * 元素去重
+        * 常用API
+            * size 元素个数
+            * s.add() 增加元素
+            * s.delete() 删除元素
+            * s.has() 是否有元素
+            * s.clear() 清空元素
+        * 应用的场景
+            * 数组去重
+            * 求交集
+            * 求并集
+            * 求差集
+     -->
+    <script>
+      let s = new Set(["1", 2, "3", "1"]);
+      console.log(s);
+      // 求交集
+      let arr = [1, 2, 3, 4, 5];
+      let arr2 = [1, 2, 5, 6, 7, 8, 9, 10];
+      let res = [...new Set(arr)].filter((item) => {
+        let res2 = new Set(arr2);
+        if (res2.has(item)) return true;
+        return false;
+      });
+      console.log(res, "求交集");
+
+      // 求并集
+      let res3 = new Set([...arr, ...arr2]);
+      console.log(res3, "求并集");
+
+      // 求差集
+      let res4 = [...new Set(arr)].filter((item) => {
+        let res2 = new Set(arr2);
+        if (!res2.has(item)) return true;
+        return false;
+      });
+      console.log(res4, "求差集");
+    </script>
+  </body>
+</html>

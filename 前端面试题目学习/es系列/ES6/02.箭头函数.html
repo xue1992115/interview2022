@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      1、箭头函数
+      * 声明一个函数
+      * 特点
+        * 箭头函数内部没有自己的this
+        * 箭头函数内部的this始终指向函数声明时所在作用域的this,是静态的，也不会改变
+        * 不能作为构造函数（都没有自己的this,this是静态的没有办法改变）
+        * 不能使用arguments
+        * 箭头函数的简写 
+          * 参数只有一个，省略参数的小括号
+          * 函数体代码之后一行，省略{},此时return必须省略
+     -->
+    <script>
+      window.b = "name";
+      const obj = {
+        b: "obj",
+      };
+      const a = () => {
+        var b = "箭头函数变量b";
+        console.log(this, "箭头函数的this");
+        console.log(this.b);
+      };
+      const c = function () {
+        var b = "普通函数变量b";
+        console.log(this, "普通函数的this");
+        console.log(this.b);
+      };
+      // 直接调用
+      a();
+      c();
+      // call方法调用
+      a.call(obj); // this发生改变
+      c.call(obj); // 箭头函数的this没有改变
+
+      const d = (n) => n + 1;
+      const f = d(2);
+      console.log(f);
+    </script>
+  </body>
+</html>
