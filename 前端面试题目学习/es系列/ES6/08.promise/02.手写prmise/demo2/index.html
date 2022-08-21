@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./PromiseOptimization.js"></script>
+    <script>
+      // 例子一
+      // const p = Promise.resolve("11111");
+      // const p = Promise.resolve(
+      //   new Promise((resolve, reject) => {
+      //     resolve("2222");
+      //     // reject("error");
+      //   })
+      // );
+      // p.then(
+      //   (value) => {
+      //     console.log(value, "value");
+      //   },
+      //   () => {}
+      // );
+      // console.log(p, "p");
+
+      // 例子二
+
+      // const p2 = Promise.reject("11111");
+      // const p2 = Promise.reject(
+      //   new Promise((resolve, reject) => {
+      //     // resolve("2222");
+      //     reject("error");
+      //   })
+      // );
+      // p2.then(
+      //   (value) => {
+      //     console.log(value, "value");
+      //   },
+      //   () => {}
+      // );
+      // console.log(p2, "p2");
+
+      // 例子三
+      // const promise1 = new Promise((resolve, reject) => {
+      //   resolve("ok");
+      // });
+      // const promise2 = Promise.resolve("2222");
+      // const promise3 = Promise.resolve("333");
+      // const p3 = Promise.all([promise1, promise2, promise3]);
+      // console.log(p3, "p3");
+
+      // 例子四
+      // const promise1 = new Promise((resolve, reject) => {
+      //   setTimeout(() => {
+      //     resolve("ok");
+      //   });
+      // });
+      // const promise2 = Promise.resolve("2222");
+      // const promise3 = Promise.reject("333");
+      // const p3 = Promise.race([promise1, promise2, promise3]);
+      // console.log(p3, "p3");
+
+      // 例子五
+      const promise1 = new Promise((resolve, reject) => {
+        resolve("2222");
+        console.log("1111");
+      });
+      promise1.then((value) => {
+        console.log(value);
+      });
+      console.log("3333");
+    </script>
+  </body>
+</html>

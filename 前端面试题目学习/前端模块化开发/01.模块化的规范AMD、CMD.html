@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        参考文章：https://blog.51cto.com/u_15403705/4910306
+        https://cloud.tencent.com/developer/article/1876771
+        1、为什么使用模块化开发？
+        * 使用模块化开发主要是解决命名冲突
+        * 提升代码的可维护性
+        * 性能优化
+        * 模块的版本管理
+        * 跨环境共享模块
+        2、目前的模块化标准
+        * CommonJS
+        * AMD
+        * CMD
+        * UMD
+        * ES6
+        3、详细了解
+        * CommonJS
+            * 什么是CommonJS规范
+                * CommonJS规范就是每个文件就是一个模块，有单独的作用域、变量、方法且对其他文件不可见
+                * NodeJS就是使用的CommonJS规范
+            * module中导出的API
+                * 每个模块内部都有一个module对象，代表的是当前的模块
+                * exports：导出模块API,加载某个模块就是加载 module.exports
+                * loaded: 判断模块加载完成
+                * parent: 返回一个对象，代表调用该模块的模块
+                * children：该模块被调用到其他模块的集合
+                * filename：模块的文件名，带有绝对的路径
+                * id: 标识这个模块，一般带有绝对的路径
+            * CommonJS规范的特点
+                * 每个文件都是独立的，不会污染全局的空间
+                * 文件可以被重复引用、加载，第一次加载会被缓存，之后在引用就直接读取缓存
+                * 加载某个模块时，module.exports输出的是值拷贝，一旦这个值输出，模块内再发生变化不会影响已经输出的值
+            * CommonJS加载过程
+                * 优先加载内置的模块
+                * 不是内置模块是文件模块的；先从缓存寻找，
+                * 缓存没有就去对应的文件路径去查找
+                * 如果以上都不是，就沿着当前路径往上逐级递归查找，直到根目录node_modules
+                * 还找不到就报错
+                * 注意：模块加载是同步加载的！！！！！！！！！！！！！，只有记载完才能执行后边的操作
+            * 优点
+                * 简单易用
+                * 可以在任意的模块require
+                * 支持循环引用
+            * 缺点
+                * 同步加载的方法不适合浏览器
+                * 浏览器端使用需要打包
+                * 难以支持模块静态分析
+        * AMD（Asynchronous Module Definition）
+            * 什么是AMD规范
+                * 和CommonJS一样也是模块化，不同的是AMD是异步加载的，可以指定回调函数；推崇依赖前置（就是优先加载依赖的模块）
+                * 异步的原因：
+                    * Node运行服务器上的文件都是存放在硬盘上的，还在速度比较快，不需要异步进行加载
+                    * 在浏览器环境下，需要从服务器端请求获取该模块资源，加载速度比较慢，因此采用异步的加载模块
+                    * 如： requireJS
+            * API
+                * define全局函数用来定义模块，在使用require方法加载模块
+                    * define("moduleName", ['require', 'exports', 'beta'], function(require,exports,beta  ) {
+                        exports.foo = function(){
+                            return beat.foo()
+                        }
+                    })
+                        * 第一个参数：模块名称
+                        * 第二个参数：数组，定义该模块依赖的模块列表
+                        * 第三个参数：模块初始化要执行的函数/对象，函数的话只执行一次，对象的话应该作为模块的输出值
+            * 优点
+                * 异步加载更快的启动速度
+                * 支持循环依赖
+                * 支持插件
+            * 缺点
+                * 语法比较复杂
+                * 依赖加载器
+                * 难以支持模块静态分析
+            
+        * CMD（Common Module Definition）
+            * 什么是CMD规范
+                * CMD 定义了一套 JavaScript 模块依赖异步加载标准，用来解决浏览器端模块加载的问题。CMD结合了AMD和CommonJS
+                * 通过 define 定义模块和依赖，require 异步加载模块，推崇依赖就近。
+                * CMD 规范最大的特点就是​​懒加载​​，不需要在定义模块的时候声明依赖，可以在模块执行时动态加载依赖，​​并且同时支持同步和异步​​加载模块
+                * define(id?: string, dependencies?: string[], factory: Function | Object);
+                    /**
+                    * define
+                    * @param id 模块名
+                    * @param dependencies 依赖列表
+                    * @param factory 模块的具体内容/具体实现
+                    */
+                * 优点：
+                    * 依赖异步加载，更快的启动速度
+                    * 支持循环依赖
+                    * 依赖就近
+                    * 与 CommonJS 保持很大的兼容性
+                * 缺点：
+                    * 语法相对复杂
+                    * 依赖加载器
+                    * 难以支持模块静态分析
+        * UMD (Universal Module Definition)
+            * 什么是UMD模块？
+                * UMD 主要为了解决 CommonJS 和 AMD 规范下的代码不通用的问题，同时还支持将模块挂载到全局，是跨平台的解决方案。
+                * UMD 可同时在服务器端和浏览器端使用。
+            * UMD 加载模块的方式取决于所处的环境，Node.js 同步加载，浏览器端异步加载。
+            * 优点：
+                * 跨平台
+            * 缺点：
+                * 代码量大
+        * EMS
+            * ESM，即 ESModule、ECMAScript Module。官方模块化规范，现代浏览器原生支持，通过 import 加载模块，export 导出内容。
+            * ESM 在支持的浏览器环境下可以直接使用，在不支持的端需要编译/打包后使用。
+            * 优点
+                * 支持同步/异步加载
+                * 语法简单
+                * 支持模块静态分析
+                * 支持循环引用
+            * 缺点
+                * 兼容性不佳
+
+        
+
+     -->
+    <script></script>
+  </body>
+</html>

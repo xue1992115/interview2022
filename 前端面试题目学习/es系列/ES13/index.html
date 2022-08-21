@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        参考文档：https://juejin.cn/post/7080803387972943880#heading-5
+        1、class中的私有属性
+        * #name 定义私有属性，类外部不能访问
+        2、RegExp Match Indices
+        * 则表达式增加了一个/d修饰符，当使用正则表达式的exec()方法时，如果有/d修饰符，那么结果会多返回一个indices属性，用来表示匹配的结果的在原字符串中的起始index值。
+        3、Top-level await
+        * 之前我们使用await时，必须使用async包裹起来，新的提案允许我们直接使用await
+        4、.at()
+        * 新增的取值方法，可作用于Array, String, TypedArray。
+        5、Accessible Object.prototype.hasOwnProperty
+        * ES2022在Object原型上新增了Object.hasOwn方法，判断对象本身是否存在某个属性，是Object.prototype.hasOwnProperty的改良版本。
+        * 当使用Object.create(null) 创建一个没有继承 Object.prototype 的对象时，hasOwnProperty 方法无法直接使用；
+        6、 Class Static Block
+        7、 Error Cause
+        * 之前，我们在封装错误信息时，比较繁琐，没有统一的字段的表示错误原因
+
+     -->
+    <script>
+         const arr = [1, 2, 3, 4, 5];
+         arr.at(1); // 2
+         arr.at(-1); // 5
+         arr.at(-10); // undefined
+         arr.at("aaaa"); // 1
+         arr.at(); // 1
+
+      async function doJob() {
+         const rawResource = await fetch('//domain/resource-a')
+           .catch(err => {
+             throw new Error('Download raw resource failed', { cause: err });
+           });
+         const jobResult = doComputationalHeavyJob(rawResource);
+         await fetch('//domain/upload', { method: 'POST', body: jobResult })
+           .catch(err => {
+             throw new Error('Upload job result failed', { cause: err });
+           });
+       }
+
+       try {
+         await doJob();
+       } catch (e) {
+         console.log(e);
+         console.log('Caused by', e.cause);
+       }
+       // Error: Upload job result failed
+       // Caused by TypeError: Failed to fetch
+    </script>
+  </body>
+</html>

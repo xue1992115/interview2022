@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      1、String.prototype.replaceAll()
+        * 替换字符串中的所有的匹配项
+      2、数字分割符_
+        * 提升可阅读性能
+      3、逻辑赋值运算符号
+        * &&= 和等于 左操作符为真，赋值；为假，不作任何操作
+        * ||= 左操作符为假赋值，为真，什么操作都不做
+        * ??= 等价于下边的语句 左边操作符为null或者undefined，赋值；其他的什么都不做
+          let first = null;
+          let second = 15;
+
+          if (first == null || first == undefined) {
+              first = second;
+          }
+      4、Promise.any()
+        * 接收多个promise，谁先改变状态就先执行谁
+      5、WeakRef
+        * 
+     -->
+    <script>
+      // previous syntax before ES12
+      const number = 92145723;
+
+      // new syntax coming with ES12
+      const number1 = 92_145_723;
+      console.log(number, "number");
+      console.log(number1, "number1");
+      console.log("aaaaaaa".replaceAll("a", "1")); // 1111111
+      console.log("aaaaaaa".replace("a", "1")); // 1aaaaaa
+      let first = 10;
+      let third = false;
+      let second = 15;
+
+      // 如果first为真，则将变量second分配给first。
+      // 否则，如果first是 falsy（false、0、-0、0n、“”、null、undefined 和 NaN），那么它什么也不做 -second不分配给first.
+      first &&= second; // 等同于first = first && second
+      third &&= second;
+      console.log(first, "first"); // 15
+      console.log(third, "third"); // false
+
+      let first2 = null;
+      let second2 = 15;
+      let third2 = 10;
+
+      first2 ||= second2; // first is 15 now
+      third2 ||= second2; // first is 15 now
+      console.log(first2, "first2"); // 15
+      console.log(third2, "third2"); // 10
+    </script>
+  </body>
+</html>
