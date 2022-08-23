@@ -1,0 +1,5 @@
+.box1 {
+    display: flex;
+    width: 400px;
+    background: url('../img/01.png') no-repeat / cover;
+}

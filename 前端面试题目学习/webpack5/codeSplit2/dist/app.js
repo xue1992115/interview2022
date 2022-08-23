@@ -1,0 +1,1 @@
+(self.webpackChunkcodesplit=self.webpackChunkcodesplit||[]).push([[143],{672:(e,s,l)=>{l.e(52).then(l.bind(l,52)).then((e=>{console.log(e)})),console.log("index.js")}},e=>{e(e.s=672)}]);

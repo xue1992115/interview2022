@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      1、webpack
+        * webpack就是一个打包工具，以一个或多个文件为入口，将所有文件进行打包输出一个或多个文件
+        * 输出的文件是编译文件，可以直接在浏览器进行运行
+        * 只能处理js文件，css文件，图片资源，字体资源是处理不了的
+      2、 两种模式
+        * 开发模式
+        * 生产模式
+      3、五大核心概念
+        * entry(入口)
+          * 打包的入口
+        * output(出口)
+          * 文件输出
+        * loader
+          * 处理其他的资源
+          * loader支持链式调用，链中的第一个loader将其结果传递给下一个loader
+          * loader执行可以是同步的，也可以是异步的
+        * plugin
+          * 插件
+        * mode模式
+          * 生产模式
+          * 开发模式
+      4、生产模式和开发模式要做的事情
+        * 生产模式
+          * 优化代码性能
+          * 优化打包速度
+            * css的资源相关处理
+              * 单独提取css文件，提升页面的性能问题
+              * 处理css兼容性问题 postcss postcss-loader postcss-preset-env
+                * 只有有兼容的属性才会设置 display: flex
+                * 该兼容性是根据浏览器的设置去添加兼容性代码，因此需要在package.json中配置browserslist
+              * 压缩css代码,css代码被压缩成一行了
+            * js资源
+              * js资源压缩
+                * 生产环境下，默认开启压缩 mode: "production"
+            * html资源
+              * html资源压缩
+                * 生产环境下，默认开启压缩 mode: "production"
+        * 开发模式
+          * 编译代码，在浏览器中可以运行（要处理样式、图片、字体、文件资源的等等）
+          * 代码质量检查 
+            * css相关资源
+            * 处理css资源
+              * style-loader： 生成style标签，将css资源插入模版中
+              * css-loader:负责将css模块编译成webpack可以识别的模块
+              * loader加载的顺序是从右向左（从下到上）的取值/执行
+            * 处理less资源
+              * less less-loader
+            * 处理sass资源
+              * sass sass-loader
+              * 注意这里的样式文件后缀名需要改成scss,否则会报错SassError: Expected newline.，原因是：scss是sass3引入的，scss语法中有{}，而sass中没有，sass-loader对二者的解析不一样。
+            * stylus-loader
+              * 处理styl的样式资源
+          * 处理图片资源
+            * 图片优化需要转成base64
+          * 处理媒体资源
+            * 字体/视频/音频
+          * JS资源的处理
+            * eslint代码规范
+              * eslint的配置；关键是些eslint的配置文件
+              * 注意eslint的配置文件需要在项目的根目录
+              * .eslintignore需要设置哪些文件不需要检查，这个是vscode读取的，有可能读取不到，需要编辑器的根目录   切记
+            * babel
+              * 主要用于将es6的语法转成向后兼容的代码，以便能够在当前浏览器和旧浏览器中运行代码
+              * babel的配置文件
+          * 处理html资源
+            * 打包的资源，自动引入html中
+          * 本地搭建服务器，实现自动化编译
+            * webpack-dev-server
+      5、webpack的高级配置
+        * 所谓的高级配置就是进行webpack优化，让代码在编译和运行的时候更好
+          * 提升开发体验
+            * sourceMap
+              * 为什么
+                * 帮助定位到源代码提示的错误
+              * 是什么
+                * 是源代码和构建后代码映射的一个文件，是一个xxx.map的文件
+              * 怎么用
+                * 开发模式： cheap-module-source-map
+                  * 优化打包速度，映射行和列
+                * 生产模式： source-map
+                  * 打包速度变慢，映射行和列  
+          * 提升构建和打包的速度
+            * HMR（hot module replace）热模块替换
+              * 为什么
+                * 在开发过程中，如果我们修改了一行代码，webpack默认就会所有模块全部打包编译的
+                  速度比较慢，所以我们要做到修改哪个模块就只重新编译哪个模块就可
+              * 是什么
+                * HMR在程序中，增加/删除某个模块，无需加载正个页面
+              * 怎么用
+                * 在开发环境hot默认是开启的，但是仅针对css文件修改是热更新，js代码不是,js需要以下的语句
+                if (module.hot) {
+                  // 判读是否支持热模块替换
+                  module.hot.accept("./count.js");
+                }
+                * 如果是开发vue和react项目，vue-loader/react-loader会自动实现热更新的
+            * oneOf
+                * 为什么
+                  * 打包时每个文件都会经过所有的loader进行处理，虽然test正则没有进行处理，但是还会经历所有的loader
+                * 是什么
+                  * one of就是只能匹配上一个loader其他的就不匹配了
+                * 怎么用
+                  * 生产环境和开发环境都可以使用
+            * include/exclude
+                * 为什么
+                  * 开发依赖性的第三方的库都是在node_modules下的，这些文件是不需要编译直接使用的
+                    所以我们在对js资源处理的时候，排除node_modules下的文件
+                * 是什么
+                  * include包含只处理的文件
+                  * exclude排除不处理的文件
+                * 怎么用
+                  * 直接在各种loader中配置即可
+            * 缓存Cache
+                * 为什么
+                  * 每次打包js文件都需要经过babel和eslint,速度比较慢；我们可以缓存之前的eslint和babel检查的结果，这样第二次打包的速度就会更快了
+                * 是什么
+                  * 对eslint检查和babel编译的结果进行缓存
+                * 怎么用
+                  * 在开发环境和生产进行使用
+            * Thread
+                * 为什么
+                  * 项目越来越大，打包速度越来越慢，想要提升打包速度，尤其是js的打包的速度，主要是eslint，babel, Terser三个工具
+                * 是什么
+                  * 多进程打包，就是开启电脑的多个进程干同一件事情，速度会更快的
+                  * （注意！！！！！！！！） 仅在特别耗时的操作中使用，因为一个进程的开启就需要600ms的
+                * 怎么用
+                  * thread-loader 开启多进行打包
+                  * terser-webpack-plugin 开启压缩
+          * 减少代码体积
+              * tree-shaking
+                * 为什么
+                  * 我们在开发过程中对于第三方的库，也许只使用其中的一部分，却全部打包了，因此体积会变大
+                * 是什么
+                  * 移除代码中没有使用的代码，依赖于ES module
+                * 怎么用
+                  * webpack 默认开启了这个功能不需要设置
+              * babel
+                * 为什么
+                  * babel为编译的每个文件插入了辅助代码，使代码的体积变大
+                * 是什么
+                  * @babel/plugin-transform-runtime 禁止对每个文件的代码进行注入，而是对引入的文件进行注入
+                * 怎么用
+              * 压缩图片
+                * 为什么
+                  * 开发中如果引入了很多的图片，那么图片的体积就会变大，那么请求速度比较慢
+                    （注意！！！！！）如果项目中是图片的连接，那就不需要了，是针对本地的静态图片资源进行压缩的
+                * 是什么
+                  * image-minimizer-webpack-plugin 进行图片的压缩
+                * 怎么用
+                  * 使用压缩的插件或者先手动进行压缩
+                  * 无损压缩和有损压缩
+          * 优化代码运行的性能
+              * code split 
+                * 为什么
+                  * 打包后的代码，都是打包到同一个文件里的，体积太大，因此需要拆分代码。生成多个js文件，加载哪个就下载哪个文件
+                * 是什么
+                  * 对代码做拆分的配置
+                    * 分割文件：将打包生成的文件进行分割，生成多个文件
+                    * 按需加载（懒加载）：需要哪个文件就加载哪个文件
+                      * 通过动态的导入，实现按需加载 import
+                * 怎么用
+                  * 参考代码
+              * preload和prefetch
+                * 为什么
+                  * 前面已经实现代码的分割，采用了懒加载也就是按需加载，但是这样有一个问题就是用的时候采取加载
+                   现在想实现在浏览器空闲的时候去加载
+                   注意（！！！！！！！！！！！！！）：这里只针对拆分出来的代码，进行预加载
+                * 是什么
+                  * preload 就是告诉浏览器立即加载资源
+                  * prefetch告诉浏览器在空闲的时候在去加载资源
+                    * 共同点
+                      * 他们都只会加载资源，并不执行；
+                      * 都会有缓存的
+                    * 区别
+                      * preload的加载的优先级更高，prefetch加载的优先级比较低
+                      * preload只能加载当前页面需要的资源，prefetch即可加载当前页面需要的资源，也可以加载下一个页面需要的资源
+                      * 兼容问题 preload的兼容性优于prefetch
+                    * 总结
+                      * 当前页面优先级高的资源，可以使用preload加载
+                      * 下一个页面需要的资源可以使用prefetch加载
+                * 怎么用
+                  * preload-webpack-plugin插件
+                  * 设置预加载的资源
+              * network的缓存
+                * 问题
+                  * 一个主要文件main.js引入了一个chunk.js, 如果我们修改了chunk.js文件，chunk.js就会重新编译，但是导致main.js也会重新编译，新生成一个文件
+                  最终导致浏览器的缓存失效；
+                * 解决办法
+                  * 生成runtime文件，文件主要是存储一个模块引用的其他模块的哈希值
+                  * contentHash
+              * Corejs
+                * 为什么
+                  * 前面使用@babel/preset-env处理了js的兼容性问题，如果此时代码中仍然存在兼容性问题，
+                  一旦遇到低版本的浏览器就会报错，所以要解决js的兼容性问题
+                * 是什么
+                  * core-js是专门用来解决es6及其以上的api的兼容性问题的polyfill(补丁/垫片)
+                  * 补丁就是社区人员专门写的，支持某些新的特性在低版本的浏览上运行
+                * 怎么用
+                  * 下载core-js npm i core-js  在手动引入 import "core-js/es/promise"
+                  * 或者 babel配置文件中进行配置，并且设置按需加载
+              * PWA  
+                * 为什么
+                  * 开发webapp项目，一旦处于离线状态，那就没有办法访问了;希望给项目提供离线访问
+                * 是什么
+                  * 渐进式网路应用程序（progressive web application）最重要的功能就是能够提供离线访问
+                * 怎么用
+                  * 具体的使用方法可以参考文档 workbox
+     -->
+    <script></script>
+  </body>
+</html>
