@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、loader
+        * 就是支持webpack可以处理各种各样的资源
+        2、loader的加载的顺序
+        * 分类
+            * pre 前置的loader
+            * normal 普通的loader （常用的类型）
+            * inline 内联loader
+            * post  后置的loader
+            * 优先级： pre->normal->inline->post
+            * 相同类别的就是 从右向左，从下向上
+            * 可定义enforce: 'pre/post/normal/inline' 默认是normal
+        3、使用loader的方法
+        * webpack配置文件中配置
+        * 使用的内联的方式
+            * import Styles from 'style-loader!css-loader?modules!./styles.css'
+            * !表示连接两个loader ?表示给loader传递的参数
+     -->
+    <script></script>
+  </body>
+</html>
