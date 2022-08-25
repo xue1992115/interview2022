@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        width: 1000px;
+      }
+      .container {
+        width: 2000px;
+        height: 2000px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">99</div>
+    <!-- 
+        1、window相关的属性只有
+        * pageXOffset
+        * scrollX
+        * pageYOffset
+        * scrollY
+        * innerHeight
+        * innerWidth
+        * outerWidth
+        * outerHeight
+
+        2、document相关的
+        * client相关的
+            * document.body.clientWidthbody的宽度（padding + content，不包含滚动条）
+            * document.body.clientHeight
+        * offset相关的
+            * document.body.offsetWidth body包含border的宽度（padding + content + border）
+            * document.body.offsetHeight
+        * scroll相关的
+            * document.body.scrollWidth body可滚动的宽度，包括overflow溢出看不到的内容
+            * document.body.scrollHeight body可滚动的高度，包括overflow溢出看不到的内容
+        3、document.documentElement
+        * document.documentElement和ocument.body前者指的是html，后者指的body对象
+        4、获取dom节点相关的
+        * getBoundingClientRect用于获取节点在浏览器的上下左右的位置
+     -->
+    <script>
+      // window.pageXOffset是scrollX的别名
+      console.log("window.pageXOffset", window.pageXOffset);
+      console.log("window.scrollX", window.scrollX);
+      //window.pageYOffset是scrollY的别名
+      console.log("window.pageYOffset", window.pageYOffset);
+      console.log("window.scrollY", window.scrollY);
+      // window.innerHeight/window.width表示浏览器窗口视口（能看到见的窗口）的高度/宽度，如果有垂直/水平的滚动条，也包括滚动条
+      console.log("window.innerHeight", window.innerHeight);
+      console.log("window.innerWidth", window.innerWidth);
+      // window.outHeight/window.outWidth表示浏览器的窗口的高度/宽度
+      console.log("window.outerWidth", window.outerWidth);
+      console.log("window.outerHeight", window.outerHeight);
+      console.log("document.body.clientWidth", document.body.clientWidth);
+      console.log("document.body.clientHeight", document.body.clientHeight);
+      console.log("document.body.offsetWidth", document.body.offsetWidth);
+      console.log("document.body.offsetHeight", document.body.offsetHeight);
+      console.log("document.body.scrollWidth", document.body.scrollWidth);
+      console.log("document.body.scrollHeight", document.body.scrollHeight);
+    </script>
+  </body>
+</html>
