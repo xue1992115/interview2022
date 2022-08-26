@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、全局属性
+        * Infinity
+        * NaN
+        * undefined
+        2、全局函数
+        * decodeURI
+        * encodeURI
+        * encodeURIComponent
+        * decodeURIComponent
+        * escape函数 对字符串进行编码
+        * eval函数，对字符串进行编码
+        * isFinite() 检查某个值是否为有穷大的数。
+        * isNaN() 	检查某个值是否是数字。
+        * Number() 	把对象的值转换为数字。
+        * parseFloat()
+        * parseInt()
+        * String()
+        * unescape()
+     -->
+    <script>
+      var url = "https://baidu.com";
+      console.log(encodeURI(url));
+      console.log(decodeURI(url));
+      console.log(encodeURIComponent(url));
+      console.log(decodeURIComponent(url));
+    </script>
+  </body>
+</html>
