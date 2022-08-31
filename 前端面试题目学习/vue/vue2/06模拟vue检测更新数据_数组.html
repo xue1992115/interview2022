@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="changeHobby">修改第一个爱好</button>
+      <button @click="addHobby">添加一个爱好</button>
+      <div>{{info.name}} - {{info.age}} - {{info.sex}}</div>
+      <ul>
+        <li v-for="item in info.hobby">{{item}}</li>
+      </ul>
+    </div>
+    <script>
+      Vue.config.productionTip = false;
+      const vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            info: {
+              name: "马冬梅",
+              age: 20,
+              hobby: ["吸烟", "喝酒", "烫头"],
+            },
+          };
+        },
+        methods: {
+          changeHobby() {
+            // 发现数据变更了，但是界面上并没有更新
+            this.info.hobby[0] = "学习";
+            // 原因是因为在Vue中，调用数组的方法：例如push
+            // pop shift unshift reverse splice sort等等方法可以数组的方法，会跟新数组
+            // 实现的方式：就是重写这个方法
+            // 重写的内容：原来的push方法 + 调用模版更新
+            // 解决方法：
+            // Vue.set或者vm.$set方法
+          },
+          addHobby() {
+            // 可以更新数据
+            this.info.hobby.push("打球");
+            console.log(this.info.hobby.push === Array.prototype.push); // false
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

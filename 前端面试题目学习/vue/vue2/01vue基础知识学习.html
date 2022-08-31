@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      // 视频观看地址：https://www.bilibili.com/video/BV1Zy4y1K7SH?p=19&spm_id_from=pageDriver&vd_source=b889f2895dcb3d033f7c73efe2d87d1f
+      // 1、vue的特点
+      // （1）采用组件化的模式。提高代码的复用率，且让代码更好的维护
+      // （2）声明式编码，让编码人员无需操作dom,提高开发的效率
+      // （3）使用虚拟的dom+优秀的diff算法，尽量的复用dom节点
+      // 2、vue的基本的语法
+      // （1）模版语法 {{}}
+      // （2）指令语法 v-bind或者（:） 单向的绑定，只能从data流向页面
+      // （3）数据绑定 v-model 双向的绑定（可以双向流动）；v-model只能应用在表单类型的元素上：例如input元素
+      // （4）el的两种写法
+      // new Vue({ el: '#App'})
+      // v.$mount('#App')
+      //  (5)data的两张写法
+      // 对象
+      // 函数（非箭头函数），返回一个对象（建议这种）
+      // （6）MVVM
+      // M: 模型model，对应data中的数据
+      // V: 视图View:模版 DOM
+      // VM: 视图模型： Vue实例对象(DOM listeners：监听用户的输入修改model 和 Data bindings（监听data的变更，更新视图）)
+      // （7）Object.defineProperty方法
+      // 新增的属性默认是不可枚举的，不可枚举就是不能参与遍历
+      let obj = {
+        name: "test",
+      };
+      let number = 18;
+      Object.defineProperty(obj, "age", {
+        value: 18,
+        // 是否可以枚举
+        enumerable: true,
+        // 是否可重写
+        writable: true,
+        // 是否可以被删除
+        configurable: true,
+        get: function () {
+          return number;
+        },
+        set: function (value) {
+          number = value;
+        },
+      });
+      console.log(obj);
+      // (8) 数据代理： 通过一个对象代理对另外一个对象中的属性操作就叫做代理
+      // 使用obj3代理obj2
+      const obj2 = {
+        x: 100,
+      };
+      const obj3 = {
+        y: 200,
+      };
+      Object.defineProperty(obj3, "x", {
+        get: function () {
+          return obj2.x;
+        },
+        set: function (value) {
+          obj2.x = value;
+        },
+      });
+      // (9)vue中的数据代理
+      // new Vue中的data在创建实例的时候，会将data赋值给vm._data上，然后通过代理
+      // 将_data上的属性放到vm实例上，所以操作vm.name实例上是操作的vm._data.name
+      // 另外vm.__data === options.data
+      //总结
+      //* 通过vm对象代理data对象中的属性的操作
+      //* vue中数据代理的好处，更好的操作data中的数据
+      //* 基本原理
+      //  * 通过Object.defineProperty()把data上的属性添加到vm上
+      //  * 为每一个添加到vm上的属性，都指定getter/setter
+      //  * 在getter/setter内部去操作属性
+      // (10) vue中的事件绑定和处理
+      // v-on:click 或@click
+      // 点击事件处理函数如果是箭头函数，函数内部的this指向的是外层包裹函数的this 也就是window
+      // 函数一般接受event参数
+      // 对于函数不做数据代理，数据代理数据代理只做数据的代理
+      // (11)事件的修饰符号
+      // @click.prevent 阻止事件的默认行为
+      // @click.stop阻止事件冒泡
+      // @click.once 事件只触发一次
+      // @click.capture 使用事件的捕获方法
+      // @click.self 只有event.target是当前操作的元素才会触发
+      // @click.passive 事件的默认行为立即执行，无需等待事件的回调函数执行完毕
+      // (12)键盘事件
+      // * @keyup.enter
+      // * @keyup.delete
+      // * @keyup.esc
+      // * @keyup.space
+      // * @keydown.tab  必须配合keydown使用
+      // * @keyup.up
+      // * @keyup.down
+      // * @keyup.left
+      // * @keyup.right
+      // (13)computed属性
+      // 计算属性就是拿着已经有的属性重新计算出的属性，就是计算属性
+      // 属性和计算属性是分开放的，但最终出现在vm上；并且对于计算出的值具有缓存
+      // get调用是初次使用是调用，并且所依赖的数据发生变化时也会调用
+      // set当fullname被修改的时候，如果要修改计算属性，必须要有set
+      //  computed: {
+      //     简写的方式
+      //     publishedBooksMessage() {
+      //       // `this` 指向当前组件实例
+      //       return this.author.books.length > 0 ? 'Yes' : 'No'
+      //     }
+      //     使用set/get
+      //     name: {
+      //        get() {
+      //            return this.name
+      //        },
+      //        set() {
+      //            return this.name
+      //        }
+      //   }
+      // (14)监听属性watch
+      // 插件介绍：vue3 Snippets 提升开发效率
+      // 写法一
+      //  watch: {
+      //     someObject: {
+      //       handler(newValue, oldValue) {
+      //         // 注意：在嵌套的变更中，
+      //         // 只要没有替换对象本身，
+      //         // 那么这里的 `newValue` 和 `oldValue` 相同
+      //       },
+      //       deep: true, // 深度监听
+      //       immediate: true //初始化时立即执行handler
+      //     }
+      //   }
+      // 写法二
+      //  watch: {
+      //       someObject(newValue, oldValue) {
+      //         // 注意：在嵌套的变更中，
+      //         // 只要没有替换对象本身，
+      //         // 那么这里的 `newValue` 和 `oldValue` 相同
+      //       },
+      //   }；
+      // 写法三
+      // 通过实例去监听某个属性值
+      // vm.$watch('someObject', {handler: function(){}})
+      // 可以监听的属性：既可以监听data中的属性，也可以监听计算属性
+      // 深度监视
+      // * vue中的watch默认是不监听对象内部属性的改变
+      // * 配置deep:true是可以监视的
+      // 备注
+      // Vue自身是可以监听对象的内部的值的变化，vue提供的watch默认是不监听的
+      // (15)watch和computed对比
+      // * computed可以完成的，watch都可以
+      // * watch可以完成的，computed不一定，例如：watch内部可以实现异步的代码
+      // 两个重要的原则
+      // * 所有被vue管理的函数最好写成一般的函数，这样this才能指向vm
+      // * 所有不被vue管理的函数最好写成觉都函数例如，setTimeout/ajax等等，这样this也可以指向vm
+      // (16)绑定样式class和style
+      // class
+      // * 绑定class是字符串的写法:class='test2' test2是一个变量；适用于动态添加样式
+      // * 绑定class是数组的写法 :class='test3' test3是一个数组['class1', 'class2']；适用于动态添加样式
+      // * 绑定class是对象的写法 :class='test4' test3是一个数组{class1: true, class2: false}；适用于动态添加样式
+      // style
+      // * :style="obj"对象写法，属性是驼峰的命名法
+      // * :style="arr"数组写法arr[obj1, obj2]，属性是驼峰的命名法
+      // (17)条件渲染
+      // * v-show: display:none
+      // * v-if: 直接没有节点了,多个条件判断建议是用 v-else-if，结构不能被打断
+      // 所以切换的比较频繁使用v-show，否则使用v-if
+      // v-if可以和template配和使用，减少dom节点
+      // v-show不能和template配合使用
+      // (18)v-for ...in/of遍历列表
+      // * key属性必须设置，遍历的时候
+      // 可遍历数组、对象、字符串、数字（后边两个用的比较少）
+    </script>
+  </body>
+</html>

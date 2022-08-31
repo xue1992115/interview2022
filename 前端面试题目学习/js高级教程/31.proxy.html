@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、proxy
+        * proxy是在目标对象上搭建了一层拦截，想要发访问这对象，需要经过这层拦截
+
+     -->
+    <script>
+      var target = {
+        name: "poetries",
+      };
+      var logHandler = {
+        get: function (target, key) {
+          console.log(`${key} 被读取`);
+          return target[key];
+        },
+        set: function (target, key, value) {
+          console.log(`${key} 被设置为 ${value}`);
+          target[key] = value;
+        },
+      };
+      var proxy = new Proxy(target, logHandler);
+      console.log(proxy, "proxy");
+      console.log(proxy.name, "name");
+      proxy.name = "test";
+      console.log(proxy.name, "name");
+    </script>
+  </body>
+</html>

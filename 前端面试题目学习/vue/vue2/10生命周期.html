@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        1、生命周期
+        * 又名：生命周期函数，生命回调函数，生命钩子函数
+        * Vue在关键时间帮助我们调用一些特殊的函数
+        * 生命周期函数的名称是不可更改的，但是函数内的内容可以自己实现
+        * 生命周期函数中的this指向的是vue的实例或者组件实例对象
+     -->
+    <div id="app">
+      <div>{{n}}</div>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          n: 1,
+        },
+        methods: {
+          add() {
+            console.log("add");
+          },
+        },
+        // 这个周期之前会初始化生命周期函数和一个事件；
+        // 这个周期不能访问data和methods
+        // 这个周期之后会初始化数据，数据的检测和数据的代理
+        beforeCreate() {
+          console.log("beforeCreate");
+          console.log(this);
+          // debugger;
+        },
+        // created生命周期中可以访问到data中的属性和methods中的方法
+        // 此阶段之后会判断有没有el/template，这个阶段是属于模版解析阶段；
+        // 生成的是虚拟的DOM,是否存放在内存中，此时还有没有展示到页面上
+        created() {
+          console.log("created");
+          console.log(this);
+          // debugger;
+        },
+        // 页面呈现的是未经编译的DOM结构，对所有的DOM的操作。!!!最终!!!不会生效的
+        // 这个周期之后就是将虚拟dom生成真实DOM然后插入页面
+        beforeMount() {
+          console.log("beforeMount");
+          console.log(this);
+          // debugger;
+        },
+        // Vue完成模版解析，并且把初始化的真实的DOM放入页面后，调用mounted函数
+        // 并且只调用一次；所以是关键时刻调用关键函数
+        //
+        mounted() {
+          this.add();
+        },
+        // 这个生命周期中数据是新的，页面时旧的
+        beforeUpdate() {},
+        // 这个生命周期中数据是新的，页面也是新的
+        updated() {},
+        beforeDestroy() {},
+        destroyed() {},
+      });
+    </script>
+  </body>
+</html>

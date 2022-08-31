@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        需求1: 定义一个v-big的指令，和v-text类似，但是数值会放大10倍
+        需求2: v-fbind指令，当绑定的input可以默认获取焦点
+     -->
+    <div id="app">
+      当前的n值是：
+      <span v-text="n"></span><br />
+      放大十倍后的n值是：
+      <span v-big="n"></span>
+      <button @click="n++">点我加1</button>
+      <hr />
+      <input type="text" v-fbind:value="n" />
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          n: 1,
+        },
+        methods: {},
+        // 自定义指令
+        directives: {
+          // big可以对象，也可以是一个函数
+          // 接收两个参数：element就是绑定的真实dom；
+          // binding是一个绑定的对象
+          // big函数何时会被调用？
+          // * 指令和元素成功绑定的时候会被调用 一上来就执行
+          // * 指令所在的模版重新解析的时候，就会被调用！！！！！！！！（不仅仅是使用到的数据）
+          // 坑：命名不能用驼峰 v-bigNumber 会报错，要使用v-big-number
+          // 指令中的this: 都是指向window，vue没有维护；因为时操作的dom元素，因此时window
+          // 现在定义的指令都是局部的指令，只能在对应的实例上使用，不能在其他的实例上使用
+          // 如果要定义全局的指令需要在Vue.directive上进行定义
+          big(element, binding) {
+            element.innerText = binding.value * 10;
+          },
+          //   fbind(element, binding) {
+          //     element.value = binding.value;
+          //     element.focus();
+          // focus不起作用，原因是执行的时机有问题，
+          // fbind是指令和元素绑定时就执行的
+          //   },
+          fbind: {
+            // 调用时间：指令和元素成功绑定时
+            bind(element, binding) {
+              element.value = binding.value;
+              console.log("bind");
+            },
+            // 调用时间：指令所在的元素被插入页面的时候
+            inserted(element, binding) {
+              element.focus();
+              console.log("inserted");
+            },
+            // 调用时间：指令所在的模版重新解析时
+            update(element, binding) {
+              element.value = binding.value;
+              console.log("update");
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

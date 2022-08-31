@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        1、key作为diff算法的标识，对应的节点
+        * 如果不写key的话，vue会自动的将遍历的索引值作为key
+        2、面试题目
+        * vue和react中key的作用
+        * 虚拟dom中的key的作用
+        * key是虚拟dom中对象的标识，当数据发生变化的时候，vue会根据新数据生成新的虚拟的dom
+        * 随后vue更新新的DOM和旧的DOM的差异的比较，则生成新的真实的DOM，随后替换页面上的真实DOM
+        3、对比的规则
+        * 旧虚拟DOM中找到新的DOM中相同的key
+            * 若虚拟DOM中的内容没有变化就是用旧的真实的DOM
+            * 若虚拟DOM中的内容发生了变化，就生成新的真实DOM，随后替换真实的DOM
+            * 若旧的DOM中没有找到与虚拟DOM中相同的key
+                * 创建新的真实DOM，所有替换页面上的真实的DOM
+        4、index作为key可能引发的问题？
+        * 若对数据进行逆序的添加、删除等破坏之前顺序的操作
+            * 会产生没有必要的真实dom的更新，=>界面没有问题，但是效率极低的情况
+        * 如果节点中还包含输入类的元素例如input
+            * 会产生错误的dom更新，界面出现问题
+        5、开发中如何选择key？
+        * 最好使用数据中的唯一的标识作为key，例如手机号、身份证号。。。。
+        * 如果没有对数据的逆序的添加和操作就可以使用index作为key
+
+     -->
+    <div id="app">
+      <button @click="add">添加一个元素</button>
+      <ul>
+        <li v-for="(p,index) in persons" :key="index">
+          {{p.name}}-{{p.age}}
+          <input type="text" />
+        </li>
+      </ul>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            persons: [
+              { id: 1, name: 1, age: 20 },
+              { id: 2, name: 2, age: 20 },
+              { id: 3, name: 3, age: 20 },
+            ],
+          };
+        },
+        methods: {
+          add() {
+            const obj = { id: 4, name: 4, age: 20 };
+            // 插入头部
+            this.persons.unshift(obj);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

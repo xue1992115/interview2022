@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <!--  
+        1、监听数据变化的地方
+        * data中的数据
+        * watch
+        * computed
+        2、如下例子当加入一条数据的时候存在问题
+    -->
+    <div id="app">
+      <button @click="update">更新第一条数据</button>
+      <ul>
+        <li v-for="(p,index) in persons" :key="index">{{p.name}}-{{p.age}}</li>
+      </ul>
+    </div>
+    <script>
+      Vue.config.productionTip = false;
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          persons: [
+            { id: 1, name: 1, age: 20 },
+            { id: 2, name: 2, age: 20 },
+            { id: 3, name: 3, age: 20 },
+          ],
+        },
+        methods: {
+          update() {
+            // 插入数据之后，发现没有奏效
+            // 该问题的发现是在2版本
+            this.persons[0] = { id: 1, name: "马冬梅", age: 20 };
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+        1、传统的写代码的方式
+        * 依赖关系混乱，不好维护
+        * 复用率不高
+        2、组件化的编码
+        * 实现某一个功能的代码和资源的集合
+        * 复用代码，提升执行效率
+        3、组件创建
+        * 组建定义时参入的参数一定不需要传入el
+        * data一定是要一个函数的形式的，不能是一个对象的形式；因为每次都要返回一个新对象
+        4、注册组件
+        * new实例的配置components对象 这种是局部注册组件
+        * Vue.component('组件名称',组件) 全局注册组件；使用就是直接使用就可以
+        5、使用组件
+        * 直接是用组件的名称在 标签中
+        6、组件命名
+        * 首字母大写 School
+        * 多个单词写 my-school 或者MySchool（首字母都大写的这种需要在脚手架下使用）
+        7、组件的嵌套
+        8、VueComponent构造函数
+        * 组件的本质是一个构造函数
+     -->
+    <script>
+      new Vue({
+        el: "#app",
+        components: {},
+      });
+    </script>
+  </body>
+</html>

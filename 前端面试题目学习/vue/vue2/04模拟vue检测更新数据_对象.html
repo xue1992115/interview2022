@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 简易版的模拟，对于深层的对象属性没有setter和getter
+      // 但是vue中的采用递归的方式实现了
+      let obj = {
+        name: "hxx",
+        age: 30,
+      };
+      // 1、创建一个监听的实例对象，用于监听data中的数据的变化
+      const obs = new Observer(obj);
+      function Observer(data) {
+        //2、汇总对象中的所有的属性，形成一个数组
+        const keys = Object.keys(data);
+        // 3、遍历
+        keys.forEach((k) => {
+          Object.defineProperty(this, k, {
+            get() {
+              return obj[k];
+            },
+            set(val) {
+              obj[k] = val;
+            },
+          });
+        });
+      }
+      // 4、准备一个vm实例对象
+      const vm = {};
+      vm._data = obj = obs;
+    </script>
+  </body>
+</html>
