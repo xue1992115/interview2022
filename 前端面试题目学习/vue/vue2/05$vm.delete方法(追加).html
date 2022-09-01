@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="addSex">添加性别</button>
+      <div>{{info.name}} - {{info.age}} - {{info.sex}}</div>
+      <ul>
+        <li v-for="item in persons">{{item.name}}-{{item.age}}</li>
+      </ul>
+      <button @click="deleteName">删除info中的name</button>
+    </div>
+    <script>
+      Vue.config.productionTip = false;
+      const vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            info: {
+              name: "马冬梅",
+              age: 20,
+            },
+            persons: [
+              { id: 1, name: 1, age: 20 },
+              { id: 2, name: 2, age: 20 },
+              { id: 3, name: 3, age: 20 },
+            ],
+          };
+        },
+        methods: {
+          addSex() {
+            // 新添加的这个属性不会更新到页面上的
+            // 并且这个属性不会被代理
+            // this.info.sex = "女";
+            // 解决上的可以通过Vue.set方法去添加
+            // Vue.set(vm._data.info, "sex", "男");
+            // vm.$set(vm._data.info, "sex", "男");
+            // 在简化一点
+            // Vue.set(vm.info, "sex", "男");
+            // vm.$set(vm.info, "sex", "男");
+            // 在在简化点
+            // Vue.set(this.info, "sex", "男");
+            vm.$set(this.info, "sex", "男");
+            // 注意！！！！！
+            // Vue.set/vm.$set是不允许直接是vue的实例或者是根对象上添加
+          },
+          deleteName() {
+            // 删除对象数据，也无法监听到
+            console.log(this.info.name);
+            // delete this.info.name;
+            // 解决办法 两种
+            // this.$delete(this.info, "name");
+            // Vue.delete(this.info, "name");
+            console.log(this.info.name);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

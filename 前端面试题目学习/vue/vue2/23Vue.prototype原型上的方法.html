@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      Vue.prototype = {
+        // target传入删除的对象
+        // key要删除的属性
+        $delete: function (target, key) {},
+        // target传入删除的对象
+        // key要删除的属性
+        // value要设置的值。value包裹在一个对象中传入的时候
+        $set: function (target, key, value) {},
+        // watch是属性监听
+        $watch: function (expOrFn, cb, options) {},
+        //  event是触发某个事件
+        $emit: function (event) {},
+        // 监听某个事件
+        $on: function (event, fn) {},
+        // 移除某个事件监听
+        $off: function (event, fn) {},
+        // 监听某个事件，只监听一次
+        $once: function (event, fn) {},
+        // 销毁某个实例
+        $destroy: function (event) {},
+        // 强制更新页面
+        $forceUpdate: function () {},
+        // 暂时不知道是做什么的
+        $inspect: function () {},
+        // 暂时不知道是做什么的
+        $mount: function () {},
+        // 重点
+        $nextTick: function () {},
+        _render: function () {},
+        _update: function () {},
+      };
+    </script>
+  </body>
+</html>

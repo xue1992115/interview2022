@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、Proxy(target, handler)
+        * Proxy 会对 target 对象进行包装。它可以是任何类型的对象，包括内置的数组，函数甚至是另一个代理对象。
+        * handler它是一个对象，它的属性提供了某些操作发生时所对应的处理函数。
+            * 调用劫持：就是只要调用了，在对应的handler提供的函数中就能监听到
+            * handler.apply()函数调用劫持
+            * handler.construct()new 操作符劫持
+            * handler.defineProperty() Object.defineProperty()调用劫持
+            * handler.deleteProperty() delete 操作符调用劫持
+            * handler.get() 获取属性值劫持
+            * handler.getOwnPropertyDescriptor() Object.getOwnPropertyDescriptor 调用劫持。
+            * handler.getPrototypeOf()  Object.getPrototypeOf调用劫持。
+            * handler.has() in操作符劫持
+            * handler.isExtensible() Object.isExtensible() 调用劫持
+            * handler.ownKeys() Object.getOwnPropertyNames 和Object.getOwnPropertySymbols调用劫持
+            * handler.preventExtensions() Object.preventExtensions调用劫持。
+            * handler.set() 修改/添加属性值劫持
+            * handler.setPrototypeOf() Object.setPrototypeOf调用劫持。
+     -->
+    <script>
+      const p = new Proxy(target, handler);
+    </script>
+  </body>
+</html>

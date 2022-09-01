@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 源数据
+      const obj = {
+        name: "张三",
+        age: 19,
+      };
+      // 模拟Vue2中的数据响应
+      let p = {};
+      // 第一个参数是代理对象
+      // 第二个参数是代理的属性
+      // 第三个参数对象，get/set是源对象的属性
+      Object.defineProperty(p, "name", {
+        // 有人读取name时调用
+        get() {
+          return obj.name;
+        },
+        set(value) {
+          console.log("有人修改了name, 我要去更新页面");
+          obj.name = value;
+        },
+      });
+      Object.defineProperty(p, "age", {
+        // 有人读取name时调用
+        get() {
+          return obj.age;
+        },
+        set(value) {
+          console.log("有人修改了age, 我要去更新页面");
+          obj.age = value;
+        },
+      });
+      p.name = "李四";
+    </script>
+  </body>
+</html>

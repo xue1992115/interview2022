@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 源数据
+      const person = {
+        name: "张三",
+        age: 19,
+      };
+      // vue3实现数据响应
+      // 第一个参数目标对象
+      // 第二个参数handler 对象
+      const p = new Proxy(person, {
+        // 参数源对象和属性名
+        get(target, key) {
+          console.log(target, key);
+          console.log(`有人读取了${key}`);
+          return target[key];
+        },
+        // 参数源对象和属性名
+        // set是修改某个属性的时候调用
+        // 添加某个属性的时候也会调用的
+        set(target, key, value) {
+          console.log(`有人修改了${key}`);
+          target[key] = value;
+        },
+        // 删除属性
+        deleteProperty(target, key) {
+          console.log(`有人删除了${key}`);
+          return delete target[key];
+        },
+        // // 增加属性
+        // deleteProperty(target, key) {
+        //   console.log(`有人删除了${key}`);
+        //   delete target[key];
+        // },
+      });
+      // console.log(p);
+    </script>
+  </body>
+</html>

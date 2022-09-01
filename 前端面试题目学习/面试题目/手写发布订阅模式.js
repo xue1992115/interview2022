@@ -10,12 +10,13 @@ class EventEmitter {
     } else {
       this.events[type].push(callback);
     }
-    console.log(this.events);
   }
   // 触发事件
   emit(type, ...rest) {
+    // this指向EventEmitter实例对象
     this.events[type] &&
       this.events[type].forEach((fn) => {
+        // 修改fn内部的this指向EventEmitter实例对象
         fn.apply(this, rest);
       });
   }
@@ -41,19 +42,21 @@ class EventEmitter {
 const event = new EventEmitter();
 
 const handler = function (...rest) {
-  console.log(rest);
+  console.log(rest, "rest 传递的参数");
+  console.log(this, "this");
 };
 const handler2 = function (...rest) {
   console.log(rest);
 };
 
 event.on("click", handler);
-event.on("click", handler2);
-event.on("click2", handler);
+event.emit("click");
+// event.on("click", handler2);
+// event.on("click2", handler);
 
-event.emit("click", 1, 2, 3, 4);
-event.off("click", handler);
-event.off("click", handler2);
-event.once("dbClick", () => {
-  console.log(123456);
-});
+// event.emit("click", 1, 2, 3, 4);
+// event.off("click", handler);
+// event.off("click", handler2);
+// event.once("dbClick", () => {
+//   console.log(123456);
+// });
