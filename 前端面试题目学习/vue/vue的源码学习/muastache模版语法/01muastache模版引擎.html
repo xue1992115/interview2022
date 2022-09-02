@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、数据变成视图的方法
+        * 纯DOM方法
+            * 非常笨拙，没有任何使用价值 
+        * 数据join方法
+            * 字符串 + innerHTMl
+            * 曾几何时非常流程
+        * ES6中的模版字符串``
+            * 非常快的将字符串和变量进行拼接
+        * 模版引擎{{}}
+     -->
+    <ul id="list"></ul>
+    <script>
+      const list = document.getElementById("list");
+      const arr = [
+        { name: "张三", age: 19 },
+        { name: "张三2", age: 19 },
+        { name: "张三3", age: 19 },
+        { name: "张三4", age: 19 },
+      ];
+      arr.forEach((item) => {
+        const liDom = document.createElement("li");
+        liDom.innerText = item.name;
+        list.appendChild(liDom);
+      });
+
+      // 数组方法
+      const arr1 = ["<div>", "<h1>", "2", "</h1>", "</div>"];
+      arr1.join("");
+    </script>
+  </body>
+</html>

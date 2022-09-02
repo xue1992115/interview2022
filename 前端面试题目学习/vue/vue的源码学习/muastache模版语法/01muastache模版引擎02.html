@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./mustache.js"></script>
+  </head>
+  <body>
+    <!-- 
+        1、Mustache使用方法一
+        * 循环数组
+        * 不循环直接使用变量
+     -->
+    <div id="container"></div>
+    <div id="container2"></div>
+    <script>
+      // 要准备数据
+      const obj = {
+        arr: [
+          { name: "张三", age: 19 },
+          { name: "张三2", age: 19 },
+          { name: "张三3", age: 19 },
+          { name: "张三4", age: 19 },
+        ],
+      };
+      // 要准备模版字符串
+      const temStr = `
+       <ul>
+        {{#arr}}
+        <li>{{name}}</li>
+        <li>{{age}}</li>
+        {{/arr}}
+      </ul>`;
+      const dom = document.getElementById("container");
+      // Mustache渲染生成真是DOM 然后挂在在节点上
+      dom.innerHTML = Mustache.render(temStr, obj);
+
+      const obj2 = {
+        a: "hxx",
+        date: new Date(),
+      };
+      //   const a = "hxx";
+      //   const date = new Date();
+      const domStr2 = `{{a}}在学习，时间{{ date }}`;
+      const dom2 = document.getElementById("container2");
+      dom2.innerHTML = Mustache.render(domStr2, obj2);
+    </script>
+  </body>
+</html>

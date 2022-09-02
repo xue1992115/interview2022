@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script>
+      window.onload = function () {
+        const str = `<h1>我买了一个{{thing}}, 好{{mood}}呀<h1>`;
+        const str2 = `
+          <ul>
+            {{#arr}}
+            <li>{{name}}</li>
+            <li>{{age}}</li>
+            {{/arr}}
+          </ul>`;
+        // 数据
+        const obj = {
+          thing: "白菜",
+          mood: "开心",
+        };
+        const dom = window.hxx_templateEngine.render(str, obj);
+        const ele = document.getElementById("test");
+        ele.innerHTML = dom;
+        // window.hxx_templateEngine.render(str2, obj);
+      };
+    </script>
+  </body>
+</html>

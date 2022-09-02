@@ -21,7 +21,7 @@
         get(target, key) {
           console.log(target, key);
           console.log(`有人读取了${key}`);
-          return target[key];
+          return Reflect.get(target, key);
         },
         // 参数源对象和属性名
         // set是修改某个属性的时候调用
@@ -29,11 +29,12 @@
         set(target, key, value) {
           console.log(`有人修改了${key}`);
           target[key] = value;
+          Reflect.set(target, key, value);
         },
         // 删除属性
         deleteProperty(target, key) {
           console.log(`有人删除了${key}`);
-          return delete target[key];
+          return Reflect.deleteProperty(target, key);
         },
         // // 增加属性
         // deleteProperty(target, key) {

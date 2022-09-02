@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、将高位数组变化成图中的对象
+        [1,2,[3,[4,5], 6], 7, [8], 9]
+        ==>
+        {
+          children: [
+          {value: 1},
+          {value: 2},
+           children: [
+              {value: 3},
+              children: [
+                  {value: 4},
+                  {value: 5},
+                  ]
+                }
+              ],
+              {value: 6},
+            }
+          ],
+          {value: 7},
+          children: [
+            {value: 8}
+          ]
+          {value: 9},
+        }
+     -->
+    <script>
+      // 写法一
+      var arr = [1, 2, [3, [4, 5], 6], 7, [8], 9];
+      // function revertObj(arr) {
+      //   var res = { children: [] };
+      //   for (var i = 0; i < arr.length; i++) {
+      //     if (typeof arr[i] === "number") {
+      //       res.children.push({ value: arr[i] });
+      //     } else if (Array.isArray(arr[i])) {
+      //       var n = revertObj(arr[i]);
+      //       res.children.push(n);
+      //     }
+      //   }
+      //   return res;
+      // }
+      // const res = revertObj(arr);
+      // console.log(res, "res");
+
+      // 写法二
+      function revert(item) {
+        if (typeof item === "number") {
+          return { value: item };
+        } else if (Array.isArray(item)) {
+          return {
+            children: item.map((i) => revert(i)),
+          };
+        }
+      }
+      var res = revert(arr);
+      console.log(res, "res");
+    </script>
+  </body>
+</html>

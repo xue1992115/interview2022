@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、实现斐波那契数列
+        * 输出前十项 1 1 2 3 5 8 13 21 34 55
+        2、思考有没有重复计算的？如何修复？
+        * 利用缓存将之前已经算过的进行缓存
+     -->
+    <script>
+      var cache = {};
+      function fib(n) {
+        console.count("计数");
+        // 如果缓存中有，直接读取缓存
+        if (cache[n]) {
+          return cache[n];
+        }
+        var v = n === 0 || n === 1 ? 1 : fib(n - 1) + fib(n - 2);
+        // 写入缓存中
+        cache[n] = v;
+        return v;
+      }
+      for (var i = 0; i < 10; i++) {
+        console.log(fib(i));
+      }
+    </script>
+  </body>
+</html>

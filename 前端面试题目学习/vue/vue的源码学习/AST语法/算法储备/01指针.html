@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、计算重复连续字符串最多的
+        'abababaaa'
+        2、解决方法
+        * 指针思想
+     -->
+    <script>
+      var str = "abababaaa";
+      var i = 0;
+      var j = 0;
+      var len = str.length;
+      var maxRepeat = 0;
+      var maxRepeatChar = str[0];
+      while (i < len) {
+        if (str[i] != str[j]) {
+          var repeat = j - i;
+          if (repeat > maxRepeat) {
+            maxRepeatChar = str[i];
+            maxRepeat = repeat;
+          }
+          i = j;
+        }
+
+        j++;
+      }
+      console.log(maxRepeat);
+      console.log(maxRepeatChar);
+    </script>
+  </body>
+</html>
