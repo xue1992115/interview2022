@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class A {
+        constructor() {
+          console.log(this, "this");
+          console.log(new.target.name, "A--new.target.name");
+        }
+        c() {
+          return 2;
+        }
+        s() {
+          console.log(this.x);
+        }
+      }
+      class B extends A {
+        constructor() {
+          console.log(new.target.name, "B--new.target.name");
+          super(); // 可以看到，在 super() 执行时，它指向的是 子类 B 的构造函数，而不是父类 A 的构造函数。也就是说，super() 内部的 this 指向的是 B。
+          console.log(super.c());
+        }
+        m() {
+          // 通过 super 调用父类的方法时，super 会绑定子类的 this
+          super.s();
+        }
+      }
+      const a = new A();
+      const b = new B(); // this指向B
+      b.m(); // 2
+    </script>
+  </body>
+</html>
