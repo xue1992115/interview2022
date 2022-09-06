@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、将所有的零移动到末尾，非零的数保持相对位置不变
+        输入: nums = [0,1,0,3,12]
+        输出: [1,3,12,0,0]
+     -->
+    <script>
+      // 方法一 双指针
+      var nums = [0, 1, 0, 3, 12];
+      var j = 0;
+      function fn(nums) {
+        if (!nums.length) return;
+        for (var i = 0; i < nums.length; i++) {
+          if (nums[i] !== 0) {
+            nums[j] = nums[i];
+            j++;
+          }
+        }
+        for (var n = j; n < nums.length; n++) {
+          nums[n] = 0;
+        }
+        return nums;
+      }
+      var res = fn(nums);
+      console.log(res);
+    </script>
+  </body>
+</html>

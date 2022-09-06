@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、题目就是求两数之后
+        * [2，5，7，8，11]  取出两个数的和是9的两个数
+        * 输出结果就是 [0， 2]
+         方法一： 暴力穷举 两个for循环
+         方法二：空间换时间
+     -->
+    <script>
+      // 方法一、暴力穷举
+      //   const arr = [2, 5, 7, 8, 11, 10];
+      //   const sum = 9;
+      //   function fn(arr, sum) {
+      //     for (var i = 0; i < arr.length; i++) {
+      //       for (var j = i + 1; j < arr.length; j++) {
+      //         if (arr[i] + arr[j] === sum) {
+      //           return [i, j];
+      //         }
+      //       }
+      //     }
+      //   }
+      // 方法二、利用hashMap
+      const arr = [2, 5, 7, 8, 11, 10];
+      const sum = 9;
+      let obj = {};
+      function fn(arr, sum) {
+        for (var i = 0; i < arr.length; i++) {
+          var another = sum - arr[i];
+          // 这边不能直接写if(obj[another]) 因为index正好是0 注意注意！！！！！
+          if (obj[another] !== undefined) {
+            return [i, obj[another]];
+          } else {
+            obj[arr[i]] = i;
+          }
+        }
+      }
+      var res = fn(arr, sum);
+      console.log(res, "res");
+    </script>
+  </body>
+</html>

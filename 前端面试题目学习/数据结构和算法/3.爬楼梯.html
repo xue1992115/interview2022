@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、假设你在爬楼梯，需要n阶才能到达楼顶
+        每次可以爬1或2阶，有多少种爬法？
+
+        解题：
+        如果有2个台阶；  方法： 2种
+        如果有3个台阶；  方法： 3种
+        如果有4个台阶；  方法： 5种
+        如果有5个台阶；  方法： 8种
+        这就表示我第一步走一阶，剩下的n-1台阶的走法
+        加上 我第一步走两阶，剩下n-2台阶的走法
+        fn = f(n-1) + f(n-2)
+     -->
+    <script>
+      // 方法一： 该方法的时间复杂度比较大，且存在重复的计算
+      //   function fn(n) {
+      //     if (n === 1) return 1;
+      //     if (n === 2) return 2;
+      //     return fn(n - 1) + fn(n - 2);
+      //   }
+      //   const res = fn(5); // 8
+      //   console.log(res);
+      // 方法二
+      // 该方法的时间复杂度是n
+      //   const hashMap = {};
+      //   function fn(n) {
+      //     console.count("计数"); // n
+      //     if (n === 1) return 1;
+      //     if (n === 2) return 2;
+      //     if (hashMap[n]) {
+      //       return hashMap[n];
+      //     } else {
+      //       const res = fn(n - 1) + fn(n - 2);
+      //       hashMap[n] = res;
+      //       return res;
+      //     }
+      //   }
+      //   const res = fn(5); // 8
+
+      // 方法三 上述递归是从上到下的解法
+      // 该循环方法是自下到上 O(n)  时间复杂度为O(n)
+      function fn(n) {
+        console.count("计数"); // n
+        if (n === 1) return 1;
+        if (n === 2) return 2;
+        let res = 0;
+        let prepre = 1;
+        let pre = 2;
+        for (let i = 3; i <= n; i++) {
+          res = pre + prepre;
+          prepre = pre;
+          pre = res;
+        }
+        return res;
+      }
+      const res = fn(5); // 8
+      console.log(res);
+    </script>
+  </body>
+</html>

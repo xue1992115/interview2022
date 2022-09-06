@@ -16,7 +16,7 @@ function quickSort(arr) {
 
   for (var i = 0; i < arr.length; i++) {
     if (arr[i] < c) {
-        // 小于c的放左边，否则放右边
+      // 小于c的放左边，否则放右边
       l.push(arr[i]);
     } else {
       r.push(arr[i]);

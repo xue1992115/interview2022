@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      1、输入：[1,2,3,0,0,0] m =3(表示有效元素为3个)  [2,5,6] n = 3
+      * 输出： [1,2,2,3，5，6]
+     -->
+    <script>
+      // 方法一
+      // var arr = [1, 2, 3, 0, 0, 0];
+      // var m = 3;
+      // var arr2 = [2, 5, 6];
+      // var n = 3;
+      // function fn(arr, m, arr2, n) {
+      //   console.log(arr, m, arr2, n);
+      //   for (var i = 0; i < n; i++) {
+      //     arr[m + i] = arr2[i];
+      //   }
+      //   return arr.sort((a, b) => {
+      //     return a - b;
+      //   });
+      // }
+      // var res = fn(arr, m, arr2, n);
+      // console.log(res);
+      // 方法二 采用双指针的方法
+      var arr = [1, 2, 3, 0, 0, 0];
+      var m = 3;
+      var arr2 = [2, 5, 6];
+      var n = 3;
+      var temp = []; // 用于缓存
+      var len = m + n;
+      function fn(arr1, m, arr2, n) {
+        for (var index = 0, index1 = 0, index2 = 0; index < len; index++) {
+          if (index1 >= m) {
+            // 数组1已经取完了
+            temp[index] = arr2[index2++];
+            // 表示数组1取完啦
+          } else if (index2 > n) {
+            temp[index] = arr1[index1++];
+          } else if (arr1[index1] < arr2[index2]) {
+            temp[index] = arr1[index1++];
+          } else {
+            temp[index] = arr2[index2++];
+          }
+        }
+        for (var i = 0; i < temp.length; i++) {
+          arr1[i] = temp[i];
+        }
+      }
+      var res = fn(arr, m, arr2, n);
+      console.log(arr);
+    </script>
+  </body>
+</html>

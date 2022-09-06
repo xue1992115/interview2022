@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        给你一个链表的头节点 head ，判断链表中是否有环。
+        如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。注意：pos 不作为参数进行传递 。仅仅是为了标识链表的实际情况。
+        如果链表中存在环 ，则返回 true 。 否则，返回 false 。
+        输入：head = [3,2,0,-4], pos = 1
+        输出：true
+        解释：链表中有一个环，其尾部连接到第二个节点
+     -->
+    <script>
+      //  方法一
+      // 使用哈希表的方式 记录遍历的节点，同时查询哈希表中是否已经存在了
+      // 方法二 双指针
+      // 快慢指针的方式，两个指针相遇了，表示有环存在了
+      // 快指针移动两个节点，慢指针移动一个节点
+      var hasCycle = function (head) {
+        if (!head) return false;
+        let slow = head;
+        let fast = head;
+        do {
+          if (!fast || !fast.next) return false;
+          slow = slow.next;
+          fast = fast.next.next;
+        } while (!(slow == fast));
+        return true;
+      };
+    </script>
+  </body>
+</html>
