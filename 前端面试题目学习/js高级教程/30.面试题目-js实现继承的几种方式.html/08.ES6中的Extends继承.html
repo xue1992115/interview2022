@@ -32,13 +32,15 @@
         get area() {
           return this.calcArea();
         }
+        static sayWord(word) {
+          return word;
+        }
 
         // Method
         calcArea() {
           return this.height * this.width;
         }
       }
-
       const rectangle = new Rectangle(10, 20);
       console.log(rectangle.area);
       // 输出 200
@@ -59,6 +61,8 @@
 
       const square = new Square(10);
       console.log(square.area);
+      console.log(square);
+      console.log(Square);
       // 输出 100
     </script>
   </body>

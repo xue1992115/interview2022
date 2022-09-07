@@ -1,3 +1,22 @@
+// 基本用法
+// async function timeout(ms) {
+//   console.log("jjj"); // 2
+//   await new Promise((resolve) => {
+//     console.log("nuhao"); // 3
+//     setTimeout(resolve, ms); // 挂起，交出函数执行权
+//   }).then(() => {
+//     console.log("去哦"); // 5
+//   });
+//   console.log("henhao"); // 6
+// }
+// async function asyncConsole(value, ms) {
+//   console.log("nia"); // 1
+//   await timeout(ms);
+//   console.log(value); // 7
+// }
+// asyncConsole("hello async and await", 1000);
+// console.log("zhenhao"); // 4
+
 // 面试题目一
 // var a = 0;
 // var b = async () => {
@@ -25,35 +44,35 @@
 // console.log("nihao");
 
 // 面试题目三
-// console.log(1);
-// async function asyncFunc() {
-//   console.log(2);
-//   // await xx ==> promise.resolve(()=>{console.log(3)}).then()
-//   // console.log(3) 放到promise.resolve或立即执行
-//   await console.log(3);
-//   // 相当于把console.log(4)放到了then promise.resolve(()=>{console.log(3)}).then(()=>{
-//   //   console.log(4)
-//   // })
-//   // 微任务谁先注册谁先执行
-//   console.log(4);
-// }
+console.log(1);
+async function asyncFunc() {
+  console.log(2);
+  // await xx ==> promise.resolve(()=>{console.log(3)}).then()
+  // console.log(3) 放到promise.resolve或立即执行
+  await console.log(3);
+  // 相当于把console.log(4)放到了then promise.resolve(()=>{console.log(3)}).then(()=>{
+  //   console.log(4)
+  // })
+  // 微任务谁先注册谁先执行
+  console.log(4);
+}
 
-// setTimeout(() => {
-//   console.log(5);
-// });
+setTimeout(() => {
+  console.log(5);
+});
 
-// const promise = new Promise((resolve, reject) => {
-//   console.log(6);
-//   resolve(7);
-// });
+const promise = new Promise((resolve, reject) => {
+  console.log(6);
+  resolve(7);
+});
 
-// promise.then((d) => {
-//   console.log(d);
-// });
+promise.then((d) => {
+  console.log(d);
+});
 
-// asyncFunc();
+asyncFunc();
 
-// console.log(8);
+console.log(8);
 
 // // 结果： 1 6 2 3 8  7  4 5
 
@@ -139,13 +158,13 @@
 // console.log("444");
 
 // 面试题目九
-var a = 0;
-var b = async () => {
-  a = a + (await 10);
-  console.log("2", a); // -> '2' 10
-  a = (await 10) + a;
-  console.log("3", a); // -> '3' 20
-};
-b();
-a++;
-console.log("1", a);
+// var a = 0;
+// var b = async () => {
+//   a = a + (await 10);
+//   console.log("2", a); // -> '2' 10
+//   a = (await 10) + a;
+//   console.log("3", a); // -> '3' 20
+// };
+// b();
+// a++;
+// console.log("1", a);

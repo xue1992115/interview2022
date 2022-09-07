@@ -9,7 +9,7 @@
 // 防抖就是进来一个人等15秒，如果过程中有人在进来，15秒重新计时，直到15秒之后，在去运送
 
 // 节流 计时+定时器（每次点击，定时器的时间根据剩余的时间重新定时）
-window.throttled = function (fn, delay) {
+const throttled = function (fn, delay) {
   let timer = null;
   // 计算开始的时间
   let startTime = Date.now();
@@ -35,7 +35,7 @@ window.throttled = function (fn, delay) {
 };
 
 // 防抖：也是使用定时器
-window.debounce = function (fn, wait, immediate) {
+const debounce = function (fn, wait, immediate) {
   let timer;
   return function () {
     const context = this;
@@ -61,3 +61,5 @@ window.debounce = function (fn, wait, immediate) {
     }
   };
 };
+
+console.log(throttled(() => {}, 100)(), "dd");

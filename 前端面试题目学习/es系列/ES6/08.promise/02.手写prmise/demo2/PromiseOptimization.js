@@ -21,6 +21,7 @@ function Promise(executor) {
     // if(this.callback.onResolved) {
     //     this.callback.onResolved(data)
     // }
+    console.log("要执行吗");
     this.callback.forEach((item) => {
       if (item.onResolved) {
         item.onResolved(data);
@@ -51,6 +52,7 @@ function Promise(executor) {
 }
 // 2、定义then方法
 Promise.prototype.then = function (onResolved, onRejected) {
+  console.log("then函数执行啦");
   const self = this;
   if (typeof onRejected !== "function") {
     onRejected = (reason) => {

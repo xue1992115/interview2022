@@ -1,7 +1,8 @@
 Function.prototype.myApply = function (context) {
-  // 保存this
+  // 保存this，这个this指向是，谁调用函数就只想谁
+  // 这里指向的是foo，把foo保存下来
   const _this = this;
-  // 将this指向传入的context
+  // 将foo做为对象的一个属性
   context.fn = _this;
   // 保存参数
   var args = [...arguments].slice(1);
@@ -10,14 +11,11 @@ Function.prototype.myApply = function (context) {
   delete context.fn;
   return result;
 };
-function foo(age) {
-  this.age = age;
-  console.log(this.name);
-  console.log(this.age);
-  console.log(this.foo);
+function foo(a, b) {
+  console.log(this.name); // 输出test
+  console.log(a, b);
 }
 const obj = {
   name: "test",
-  foo: () => {},
 };
-console.log(foo.myApply(obj, [29]));
+console.log(foo.myApply(obj, [1, 2]));
