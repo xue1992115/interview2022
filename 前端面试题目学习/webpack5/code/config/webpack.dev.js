@@ -1,12 +1,12 @@
 const os = require("os");
 const path = require("path");
-const { extendDefaultPlugins } = require("svgo");
+// const { extendDefaultPlugins } = require("svgo");
 
 // 插件需要引入才能使用
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+// const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 const threads = os.cpus().length;
 
@@ -117,35 +117,35 @@ module.exports = {
       parallel: threads,
     }),
     // 压缩图片
-    new ImageMinimizerPlugin({
-      minimizerOptions: {
-        // Lossless optimization with custom option
-        // Feel free to experiment with options for better result for you
-        plugins: [
-          ["gifsicle", { interlaced: true }],
-          ["jpegtran", { progressive: true }],
-          ["optipng", { optimizationLevel: 5 }],
-          // Svgo configuration here https://github.com/svg/svgo#configuration
-          [
-            "svgo",
-            {
-              plugins: extendDefaultPlugins([
-                {
-                  name: "removeViewBox",
-                  active: false,
-                },
-                {
-                  name: "addAttributesToSVGElement",
-                  params: {
-                    attributes: [{ xmlns: "http://www.w3.org/2000/svg" }],
-                  },
-                },
-              ]),
-            },
-          ],
-        ],
-      },
-    }),
+    // new ImageMinimizerPlugin({
+    //   minimizerOptions: {
+    //     // Lossless optimization with custom option
+    //     // Feel free to experiment with options for better result for you
+    //     plugins: [
+    //       ["gifsicle", { interlaced: true }],
+    //       ["jpegtran", { progressive: true }],
+    //       ["optipng", { optimizationLevel: 5 }],
+    //       // Svgo configuration here https://github.com/svg/svgo#configuration
+    //       [
+    //         "svgo",
+    //         {
+    //           plugins: extendDefaultPlugins([
+    //             {
+    //               name: "removeViewBox",
+    //               active: false,
+    //             },
+    //             {
+    //               name: "addAttributesToSVGElement",
+    //               params: {
+    //                 attributes: [{ xmlns: "http://www.w3.org/2000/svg" }],
+    //               },
+    //             },
+    //           ]),
+    //         },
+    //       ],
+    //     ],
+    //   },
+    // }),
   ],
   devtool: "cheap-module-source-map",
   mode: "development",

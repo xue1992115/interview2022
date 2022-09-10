@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .logo {
+        width: 200px;
+        height: 3px;
+      }
+      /* 注意一下的规则顺序不能乱，是一个匹配规则，从小往大显示 */
+      @media screen and (-webkit-min-device-pixel-ratio: 2),
+        (device-pixel-ratio: 2) {
+        /* dpr最小是2使用2x图 */
+      }
+      @media screen and (-webkit-min-device-pixel-ratio: 3),
+        (device-pixel-ratio: 3) {
+        /* dpr最小是3使用3x图 */
+      }
+      @media screen and (-webkit-min-device-pixel-ratio: 4),
+        (device-pixel-ratio: 4) {
+        /* dpr最小是4使用4x图 */
+      }
+      /* 项目通常使用的 */
+      /* @mixin bg-image($url, $size: contain, $repeat: no-repeat) {
+        background-image: url($url + "@2x.png");
+        background-size: $size;
+        background-repeat: $repeat;
+        @media (-webkit-min-device-pixel-ratio: 3),
+          (min-device-pixel-ratio: 3) {
+          background-image: url($url + "@3x.png");
+        }
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- 
+        1、图片高清显示
+        * 位图像素
+            * 像素点组成，这个像素点是位图的像素点（位图中的一个小格子，是ps修改图），放大失真
+            * 图片分辨率，指的是位图的像素点，就是小格子
+        * 矢量图
+            * 面向对象图像，或绘图图像，放大后不会失真 sketch
+        * 2x倍图和3x倍图
+            * 通过媒体查询 设置使用2倍图还是3倍图
+        * 注意 项目中需要判断哪些需要做高清显示，有的需要，有的不需要；
+     -->
+  </body>
+</html>

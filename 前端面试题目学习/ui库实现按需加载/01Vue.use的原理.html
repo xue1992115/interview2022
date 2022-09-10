@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        参考文章：
+        https://www.jianshu.com/p/0b8b6f2e5a82
+        1、Vue.use的源码逻辑
+        * 防止重复注册
+        * 接收两个参数 Object（中必须包含install方法）和function（直接执行函数）
+        * 在执行install方法的第一个参数的Vue, 第二个参数是options；function第一个参数的null，第二个参数是options
+        export function initUse (Vue: GlobalAPI) {
+            Vue.use = function (plugin: Function | Object) {
+            const installedPlugins = (this._installedPlugins || (this._installedPlugins = []))
+            // 看看是不是已经注册过了，防止重复注册
+            if (installedPlugins.indexOf(plugin) > -1) {
+            return this
+            }
+            const args = toArray(arguments, 1)
+            args.unshift(this)
+            if (typeof plugin.install === 'function') {
+            plugin.install.apply(plugin, args)
+            } else if (typeof plugin === 'function') {
+            plugin.apply(null, args)
+            }
+            installedPlugins.push(plugin)
+            return this
+            }
+            }
+
+            2、什么时候使用Vue.use
+            import Vue from 'vue'
+            import Element from 'element-ui'
+            Vue.use(Element)
+
+          3、除了Vue.use
+          * 还有Vue.component全局注册组件，这样在该应用下的任何组件都可以使用
+          * Vue.directive 全局注册指令，这样在该应用下的任何组件都可以使用
+          * Vue.mixin 全局注册指令，这样在该应用下的任何组件都可以使用
+          * Vue.prototype.$http = function() {} 原型上注册
+     -->
+  </body>
+</html>

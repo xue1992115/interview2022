@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .test {
+        width: 280px;
+        height: 100px;
+        position: relative;
+      }
+      .test:after {
+        content: " ";
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 1px solid black;
+        transform-origin: 0 0;
+        box-sizing: border-box;
+        border-radius: 10px;
+        pointer-events: none;
+        /* 媒体查询失效了 */
+        /*  原理是设置宽高是两倍，缩放的时候，border也会适配被缩放
+        而且还有圆角 */
+        /* 这种方法常见的问题就是：
+        细边框有时候展示不全，可能与元素的高度、行高及像素的小点有关
+        解决办法：https://segmentfault.com/a/1190000023530122
+         */
+         /*1px边框的button也是同样的实现的原理
+          */
+        @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+          width: 200%;
+          height: 200%;
+          transform: scale(0.51);
+        }
+        @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+          width: 300%;
+          height: 300%;
+          transform: scale(0.34);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test">test</div>
+  </body>
+</html>

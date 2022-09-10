@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、视口相关
+        * PC端的视口就是浏览器窗口的大小
+        * 最干净的显示区域 document.documentElement.clientWidth/Height
+        * 最干净的显示区域+滚动条 window.innerWidth
+        * 最干净的显示区域+滚动条+浏览器边框 window.outerWidth
+        * 与浏览器无关（就是不管窗口的大小），显示分辨率 screen.width
+        2、移动端的视口
+        * 早期问题，手机厂商如何将pc端网页完成的呈现在移动端呢？并且不会出现横向滚动条
+        * 就出现了布局视口、视觉视口、理想视口
+            * 布局视口
+                * 就是一个容器，PC端网页基本上宽度在960～1024区域，所以设置这个容器是980px;
+                * 先用这个布局容器存放pc端的页面，然后等比例压缩页面在手机上；
+                问题网页被压缩太小，影响用户体验
+                * 移动端document.documentElement.clientWidth获取的视布局视口
+                (而不是干净的浏览器的区域了) 手机上都是980px，ipad上不一定
+                * 注意！！！！！！！此时存在缩放了
+                * 导致css像素不在是375了，而是980px！！！！！！！！！
+            * 视觉视口：就是用户可见的宽度，是一个绝对的宽度，也可以用相对去表示
+                * 但是这个宽度存放的css像素点事不一样的，
+                一般手机会把980个css像素点放进手机了，ipad会把1024个css像素压缩到一个屏幕里
+                * 移动端获取视觉视口  window.innerWidth（980px）;一般不通过代码去获取
+            此时：iphone6
+            750物理像素
+            375设备独立像素！！！！！
+            980css像素 ！！！！
+            980出现破坏了设备独立像素和css像素的比例，但是解决了方式的问题（把网页放到移动端）
+            * 理想视口
+                * 理想视口就是布局视口和屏幕等宽（设备独立像素相等）了就称为理想的视口了
+                * 所以就要设置理想视口===设备独立像素
+                * 具体的方法
+                将设备独立像素宽度设备给了布局视口
+                <meta name="viewport" content="width=device-width" />
+
+     -->
+  </body>
+</html>

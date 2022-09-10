@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        // js代码可以在浏览器中调试，也可以在vscode中调试
+        // https://juejin.cn/post/7010768454458277924
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "pwa-chrome",
+            // url是网页地址
+            "url": "http://localhost:8080/",
+            // react配置这个选项就可以
+            // "webRoot": "${workspaceFolder}"
+            // Vue需要配置这个选项，比较麻烦一点的
+            "sourceMapPathOverrides": {
+                //
+                "webpack://test-vue-debug/src/*?11c4 ":  "${workspaceRoot}/src/*"
+            }
+        }
+    ]
+}

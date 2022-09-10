@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+        1、总结的地址
+        https://juejin.cn/post/6901940698518732808
+        https://juejin.cn/post/7103835385280593957
+        https://juejin.cn/post/6897011153650761736#heading-15
+        2、音视频问题
+        * 为什么会放在开头，因为音视频的兼容问题确实挺多的
+          * 自动播放问题
+            * ios safariiPhone Safari中不支持，但在webview中可能被开启；iOS开发文档明确说明蜂窝网络下不允许autoplay；
+            * chrome中，设置mouted后可以自动播放
+            * 微信中不允许自动播放。但是可以借助WeixinJSBridge实现
+          * 单例问题
+            * ios safari中的音频对象是单例的，ios中是无法播放多个音频文件的
+          * 循环播放
+            * ios部分机型不支持循环播放
+            * 解决方案：监听播放完成事件ended，手动触发播放
+              <!doctype html>
+              <html>
+              <head>
+                  <title>Looping Audio</title>
+                  <script type="text/javascript">
+                      function init() {
+                          var myAudio = document.getElementById("audio");
+                          myAudio.addEventListener('ended', loopAudio, false);
+                      }
+                      function loopAudio() {
+                          var myAudio = document.getElementById("audio");
+                          myAudio.play();
+                      }
+              </script>
+              </head>
+              <body onload="init();">
+                  <audio id="audio" src="myAudio.m4a" controls></audio>
+              </body>
+              </html> 
+            * 视频下的样式问题
+              * 不同的浏览器上的样式不一样
+          3、海报生成-html2Canvas
+          营销场景和裂变过程中，我们需要将页面内容一部分作为图片整体分享出去。
+          大部分情况下会用到html2Canvas；
+          如果只是简单的二维码加海报图，建议直接用drawImg，而不是用和这个插件
+          4、经典的1px边框
+          * 一般是采用伪元素模拟的方式，原理：把原先元素的 border 去掉，然后利用 :before 或者 :after 重做 border ，并 transform 的 scale 缩小一半，原先的元素相对定位，新做的 border 绝对定位。
+          5、android，border-radius:50%不圆
+          * 具体是因为，使用了rem布局，在部分机型上出现的问题，设置具体的px数值，不用50%即可
+          6、android里line-height不居中
+          * https://www.zhihu.com/question/39516424/answer/274374076
+          * 把line-height设置为0，使用padding值把元素撑开，说是可以解决（不适用）。
+          * 1.和UED团队协商，避免设计低于12px的元件。只要保证这两点，其他css布局随便用安卓都不会出现上浮的情况。
+          * 1.给整个web应用设置默认字体（font-face 指向字体包，然后font-family使用，必须这样！！！）
+          7、安卓部分版本input的placeholder偏上
+          原因：https://stackoverflow.com/questions/4919680/html5-placeholder-css-padding
+           input{
+                line-height:normal;
+            }
+          8. ios的body设置overflow:hidden仍然可以滚动
+          一般在所有元素最外层再包一个大盒子.wrap
+           .wrap{
+              position:relative;
+              overflow:hidden;
+          }
+          9. ios 滚动不流畅
+          使用了absolute布局之后，ios会发现元素内的滚动非常不流畅，滑动的手指松开后，滚动立刻停止，失去了原本的流畅滚动特性。百度一下弹性滚动的问题，
+          发现在 webkit 中，下面的属性可以恢复弹性滚动。
+          -webkit-overflow-scrolling: touch;
+
+          10.ios fixed问题
+          这种常见的布局，但是用ios下当键盘弹起时fixed会失效。
+          解决办法在下面文章里：就是把页面滚动改为容器内滚动。
+          参考文章：https://efe.baidu.com/blog/mobile-fixed-layout/
+
+          11. 点透问题
+          首先想到的是fastclick.js这个库，但是是否真的需要，详情看看这篇文章
+          fastClick 在 touchend 阶段 调用 event.preventDefault，然后通过 document.createEvent 创建一个 MouseEvents，然后 通过 event​Target​.dispatch​Event 触发对应目标元素上绑定的 click 事件
+          12. 键盘遮挡输入框问题
+          https://www.zhihu.com/question/32746176
+          13.ios日期转换NAN问题
+          具体就是，new Date('2020-11-12 00:00:00')在ios中会为NAN
+          解决方案：用new Date('2020/11/12 00:00:00')的日期格式，或者写个正则转换
+          14. ios滚动时动画停止
+          移动端滚动懒人推荐使用better-scroll，很好的插件
+          ios滚动动画停止的原因及其他解决办法：CSS3 动画在 iOS 上为什么会因为页面滚动也停止？
+          https://link.juejin.cn/?target=https%3A%2F%2Fwww.zhihu.com%2Fquestion%2F24268253
+          .animation {
+                transform: translate3d(0, 0, 0);
+            }
+          15. 长按闪退
+          element {
+              -webkit-touch-callout:none;
+          }
+          16. 禁止数字识别为电话号码
+             <meta name = "format-detection" content = "telephone=no">
+          17. transition闪屏
+           .box { 
+              -webkit-transform-style: preserve-3d; 
+              -webkit-backface-visibility: hidden; 
+              -webkit-perspective: 1000; 
+          }
+          18.  CSS3动画卡顿
+          尽量使用transform，避免使用height,width,margin,padding等。可以开启GPU硬件加速，但用硬件加速的时候也要注意，因为这个也有坑，不合理使用反而会让应用越来越卡！
+          硬件加速也有坑：https://juejin.cn/post/6844903597772111886
+          19. margin bottom
+          典型的bug，其实这个bug大家都有办法解决，直接使用padding-bottom就好了。
+          20. iphoneX
+          const isIphonex = () => {
+            // X XS, XS Max, XR
+            const xSeriesConfig = [
+              {
+                devicePixelRatio: 3,
+                width: 375,
+                height: 812,
+              },
+              {
+                devicePixelRatio: 3,
+                width: 414,
+                height: 896,
+              },
+              {
+                devicePixelRatio: 2,
+                width: 414,
+                height: 896,
+              },
+            ];
+            // h5
+            if (typeof window !== 'undefined' && window) {
+              const isIOS = /iphone/gi.test(window.navigator.userAgent);
+              if (!isIOS) return false;
+              const { devicePixelRatio, screen } = window;
+              const { width, height } = screen;
+              return xSeriesConfig.some(item => item.devicePixelRatio === devicePixelRatio && item.width === width && item.height === height);
+            }
+            return false;
+          }
+          21. 移动端滑动穿透
+          弹框的内容明显长过屏幕，需要弹框内容滑动，主页页面不滑动
+          原理：弹出弹框时，使背景主页内容作为固定定位，这样页面的滑动对其就没有任何影响，关闭弹框使，移除这个固定定位的类名，回复正常
+          <script type="text/javascript">
+            //解决遮罩层滚动穿透问题，分别在遮罩层弹出后和关闭前调用
+            const ModalHelper = ( (bodyCls) =>{
+              let scrollTop;
+              return {
+                afterOpen: function () {
+                  scrollTop = document.scrollingElement.scrollTop;
+                  document.body.classList.add(bodyCls);
+                  document.body.style.top = -scrollTop + 'px';
+                },
+                beforeClose: function () {
+                  document.body.classList.remove(bodyCls);
+                  // scrollTop lost after set position:fixed, restore it back.
+                  document.scrollingElement.scrollTop = scrollTop;
+                }
+              };
+            })('dialog-open');
+          </script>
+
+          body.dialog-open {
+            position: fixed;
+            width: 100%;
+          }
+          22.ios手机刘海屏和底部小黑条适配
+          原因：
+          苹果公司提出的安全区域概念（safe area），
+          简单的说就是我们的移动端页面可操作区域应该避
+          开刘海区域和小黑条，因为在这两处地方的操作是不会
+          响应我们的页面，即如果我们的按钮在这两块区域范围，
+          那我们的点击就不会触发按钮上的事件
+          解决方案：
+          官方给出的适配方案
+          iOS11同时新增了一个特性，constant(safe-area-inset-*)，这是Webkit的一个CSS函数，用于获取安全区域与边界的距离，有四个预定义的变量（单位px）:
+          safe-area-inset-left：安全区域距离左边界距离，横屏时适配
+          safe-area-inset-right：安全区域距离右边界距离，横屏时适配
+          safe-area-inset-top：安全区域距离顶部边界距离，竖屏下刘海屏为44px，iphone6系列20px，竖屏刘海适配关键
+          safe-area-inset-bottom：安全区域距离底部边界距离，竖屏下为34px，竖屏小黑条适配关键
+          一般使用 safe-area-inset-top，safe-area-inset-bottom，
+
+          // 让页面占满全屏
+          <meta name="viewport" content="viewport-fil=cover">
+          // 使用@supports查询机型是否支持constant()或env()实现兼容代码隔离，个别安卓也会成功进入这个判断，因此加上-webkit-overflow-scrolling: touch的判断可以有效规避安卓机。
+            env() 是为了防止大于IOS11版本不支持constant()
+
+        @supports ((height: constant(safe-area-inset-top)) or (height: env(safe-area-inset-top))) and (-webkit-overflow-scrolling: touch) {
+        .fullscreen {
+            /* 适配齐刘海 */
+            padding-top: constant(safe-area-inset-top);
+            padding-top: env(safe-area-inset-top);
+            
+            /* 适配底部小黑条 */
+            padding-bottom: costant(safe-area-inset-bottom);
+            padding-bottom: env(safe-area-inset-bottom);
+          }
+        }
+        23.ios手机最后一个子元素设置margin-bottom无效
+        将margin-bottom改成padding-bottom
+
+        24.ios手机上输入框无法选中聚焦
+        手贱设置了全部元素无法被选中（需求上不允许用户复制图片和文字）
+        * {
+            webkit-user-select: none;
+        }
+        解决方案：输入框元素不设置这个属性，如果还存在问题，尝试在输入框和其父元素设置-webkit-user-select:text !important属性
+         25.ios系统14以上，使用transform实现动画时，会出现闪屏的情况
+         .father {
+            transform: translate3d(0, 0, 1);
+            backface-visibility: hidden;
+        }
+        26.块级元素内嵌套图片，图片上下不居中
+        解决方案：
+          1.在div内设置font-size和行高为0，使用flex布局居中
+          2.设置图片diaplay：block
+        27.什么时候webview
+        https://www.jianshu.com/p/f3e08d7835af
+        28.浏览器置于后台（移动端表现为去聊微信了），倒计时不准问题
+        原因：
+        浏览器的“休眠”模式，页面未激活状态时，浏览器为节省性能，会停止或减少定时任务
+        解决方案：
+        使用visibilitychange监听页面是否可见（激活）去重新拉取后台时间，使用setTimeout去进行倒计时，setTimeout会有误差，每次执行需要计算出减去误差后的时间作为下次执行的间隔
+        29.vite3创建的vue项目本地开发服务在ios12.1及以下版本的手机上白屏（感谢叶同学提供此问题及解决方案）
+        原因：
+        globalThis为undefined的原因，globalThis的兼容性
+        <script>
+          if (globalThis === undefined) { var globalThis = window; }
+        </script>
+     -->
+  </body>
+</html>
