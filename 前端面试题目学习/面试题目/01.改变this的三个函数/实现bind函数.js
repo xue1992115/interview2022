@@ -11,8 +11,8 @@ Function.prototype.myBind = function (context) {
   var args = [...arguments].slice(1);
   return function F() {
     // 因为bind是返回一个函数，这个函数式可以new的，因此，需要判断
-    if(this instanceof F) {
-      
+    if (this instanceof F) {
+      return new _this(...args, ...arguments);
     }
     return _this.apply(context, args);
   };

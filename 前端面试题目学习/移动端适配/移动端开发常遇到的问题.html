@@ -93,7 +93,7 @@
           .animation {
                 transform: translate3d(0, 0, 0);
             }
-          15. 长按闪退
+          15. ios长按闪退
           element {
               -webkit-touch-callout:none;
           }
@@ -183,7 +183,7 @@
           一般使用 safe-area-inset-top，safe-area-inset-bottom，
 
           // 让页面占满全屏
-          <meta name="viewport" content="viewport-fil=cover">
+          <meta name="viewport" content="viewport-fill=cover">
           // 使用@supports查询机型是否支持constant()或env()实现兼容代码隔离，个别安卓也会成功进入这个判断，因此加上-webkit-overflow-scrolling: touch的判断可以有效规避安卓机。
             env() 是为了防止大于IOS11版本不支持constant()
 

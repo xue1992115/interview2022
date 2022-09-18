@@ -8,24 +8,26 @@
   </head>
   <body>
     <script>
-      var arr = [8, 5, 10, 13, 45, 6, 8];
+      // 希尔排序的原理是在插入排序法的基础上进行的优化
+      var arr = [8, 5, 10, 13, 45, 6, 8, 11];
       function shellSort(arr) {
-        var len = arr.length,
-          temp,
-          gap = 1;
-        while (gap < len / 3) {
-          //动态定义间隔序列
-          gap = gap * 3 + 1;
-        }
-        for (gap; gap > 0; gap = Math.floor(gap / 3)) {
-          console.log(gap, "gap");
+        // 获取数组的长度
+        var len = arr.length;
+        // 动态获取间隔
+        var gap = Math.floor(len / 2);
+        var cur;
+        while (gap > 0) {
           for (var i = gap; i < len; i++) {
-            temp = arr[i];
-            for (var j = i - gap; j >= 0 && arr[j] > temp; j -= gap) {
-              arr[j + gap] = arr[j];
+            cur = arr[i];
+            var pre = i - gap;
+            // 这一步类似于插入排序法，寻找最小的进行替换
+            while (pre >= 0 && arr[pre] > cur) {
+              arr[pre + gap] = arr[pre];
+              pre -= gap;
             }
-            arr[j + gap] = temp;
+            arr[pre + gap] = cur;
           }
+          gap = Math.floor(gap / 2);
         }
         return arr;
       }
