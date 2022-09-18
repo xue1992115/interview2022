@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var arr = [8, 5, 10, 13, 45, 6, 8, 11];
+      function mergeSort(arr) {
+        if (arr.length < 2) return arr;
+        var mid = Math.floor(arr.length / 2);
+        var left = arr.slice(0, mid);
+        var right = arr.slice(mid);
+        return merge(mergeSort(left), mergeSort(right));
+      }
+      function merge(left, right) {
+        var res = [];
+        var len = left.length + right.length;
+        var l = 0;
+        var r = 0;
+        for (var i = 0; i < len; i++) {
+          if (l >= left.length) {
+            // 表示左边的数组取完了
+            res[i] = right[r++];
+          } else if (r >= right.length) {
+            res[i] = left[l++];
+          } else if (left[l] > right[r]) {
+            res[i] = right[r++];
+          } else {
+            res[i] = left[l++];
+          }
+        }
+        return res;
+      }
+      var res = mergeSort(arr);
+      console.log(res, "拍完啦");
+    </script>
+  </body>
+</html>

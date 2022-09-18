@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .test {
+        /* 首行缩进 */
+        text-indent: 2em;
+        /* 首字母大写：https://www.runoob.com/cssref/pr-text-text-transform.html */
+        text-transform: capitalize;
+        width: 100px;
+        background-color: aqua;
+        /*超过一行显示 */
+        /* overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis; */
+        /* 超过三行，... */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test">
+      dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+  </body>
+</html>
