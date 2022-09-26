@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 通过递归的方式
+      var letterCombinations = function (digits) {
+        const cArr = digits.split("").map((item) => map.get(item).split(""));
+        const m = cArr.length;
+        let res = [];
+        const dfs = (index, temp) => {
+          if (index === m) {
+            if (temp.length > 0) res.push(temp.join(""));
+            return;
+          }
+          let letter = cArr[index];
+
+          for (let i = 0; i < letter.length; i++) {
+            temp.push(letter[i]);
+            dfs(index + 1, temp);
+            temp.pop();
+          }
+        };
+        dfs(0, []);
+        return res;
+      };
+
+      const map = new Map();
+      map.set("2", "abc");
+      map.set("3", "def");
+      map.set("4", "ghi");
+      map.set("5", "jkl");
+      map.set("6", "mno");
+      map.set("7", "pqrs");
+      map.set("8", "tuv");
+      map.set("9", "wxyz");
+      var res = letterCombinations("23");
+    </script>
+  </body>
+</html>
