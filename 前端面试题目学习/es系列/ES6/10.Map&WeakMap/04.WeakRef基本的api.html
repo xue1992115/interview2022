@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       // 1、在ES12(WS2021)中提供了一个WeakRef的构造函数，作用就是创建弱引用的对象
+       let target = {};
+       let wr = new WeakRef(target);
+       // wr是WeakRef返回的新的一个实例，属于对target的弱引用，
+       // 垃圾回收机制不会计入这个引用，也就是说，wr的引用不会妨碍原始对象target被垃圾回收机制清除。
+       console.log(target === wr, 'target');
+       // 2、WeakRef 实例对象有一个deref()方法，如果target没有被清除，就返回target,
+       // 已经清除了就返回undefined
+       let obj = wr.deref();
+        if (obj) {
+            // target 未被垃圾回收机制清除
+            console.log("未被垃圾回收机制清除");
+        } else {
+            console.log("已经被垃圾回收机制清除");
+        }
+    </script>
+</body>
+</html>
