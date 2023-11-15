@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var myObject = {
+            foo: 1,
+            bar: 2,
+            get baz() {
+                return this.foo + this.bar;
+            },
+        }
+        console.log(Reflect.get(myObject, "foo")); // 1
+        console.log(Reflect.get(myObject, "baz")); // 3
+        var myReceiverObject = {
+            foo: 4,
+            bar: 4,
+        };
+        // 这里的this绑定的是receiver对象
+        console.log(Reflect.get(myObject, "baz", myReceiverObject)); // 8
+        // 如果第一个参数不是对象，就会报错
+        try {
+            Reflect.get("baz", myReceiverObject) // Reflect.get called on non-object
+        } catch (error) {
+            console.log(error);
+        }
+    </script>
+</body>
+</html>

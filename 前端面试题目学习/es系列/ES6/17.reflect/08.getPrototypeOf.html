@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function FancyThing(){}
+        // Reflect.getPropertyOf()用于取对象上的__proto__
+        const myObj = new FancyThing();
+        // 旧写法
+        console.log(Object.getPrototypeOf(myObj) === FancyThing.prototype); // true
+        console.log(myObj.__proto__); // constructor
+        console.log(Object.getPrototypeOf(myObj));  // constructor
+        console.log(FancyThing.prototype); // constructor
+    </script>
+</body>
+</html>

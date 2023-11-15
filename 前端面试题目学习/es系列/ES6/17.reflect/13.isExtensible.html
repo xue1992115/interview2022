@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Reflect.isExtensible方法对应Object.isExtensible，返回一个布尔值，表示当前对象是否可扩展。
+        const myObject = {};
+
+        // 旧写法
+        Object.isExtensible(myObject) // true
+
+        // 新写法
+        Reflect.isExtensible(myObject) // true
+    </script>
+</body>
+</html>

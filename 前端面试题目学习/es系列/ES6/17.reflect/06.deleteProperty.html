@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Reflect.deleteProperty()等同于delete操作符号
+        const myObj = { foo: 'bar' };
+
+        // 旧写法
+        console.log(delete myObj.foo); // true
+
+        // 新写法
+        console.log( Reflect.deleteProperty(myObj, 'foo')); // true
+    </script>
+</body>
+</html>

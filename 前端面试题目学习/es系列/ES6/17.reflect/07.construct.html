@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Reflect.construct()等同于new target的操作符号
+        function Greeting(name) {
+            this.name = name;
+        }
+        // new 的写法
+        const instance = new Greeting('张三');
+        console.log(instance);
+        // Reflect的写法
+        const instance2 = Reflect.construct(Greeting, ['张三']);
+        console.log(instance2)
+    </script>
+</body>
+</html>

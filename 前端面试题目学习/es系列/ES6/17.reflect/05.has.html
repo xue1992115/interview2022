@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Reflect.has()方法对应的是in操作符号
+        var myObject = {
+            foo: 1,
+        };
+        // 旧写法
+        console.log('foo' in myObject); // true
+        // 新写法
+        Reflect.has(myObject, 'foo') // true
+        console.log(Reflect.has(myObject, "foo")) // 如果第一个参数不是对象就会报错
+    </script>
+</body>
+</html>
